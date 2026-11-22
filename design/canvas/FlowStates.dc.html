@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>AegisOne Open: Flow states</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&amp;family=Geist+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#075E58}a:hover{color:#04403C}
+</style>
+</helmet>
+<div style="width: 1280px; height: 1500px; box-sizing: border-box; overflow: hidden; padding: 40px; background: #E9EEF3; color: #17253A; font-family: 'Geist', system-ui, -apple-system, 'Segoe UI', sans-serif; font-size: 16px; line-height: 1.5; -webkit-font-smoothing: antialiased; display: flex; flex-direction: column; gap: 24px;">
+  <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 24px;">
+    <div>
+      <span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 12.5px; color: #075E58; letter-spacing: 0.06em;">STATES · FLOWS</span>
+      <h1 style="margin: 4px 0 0; font-size: 30px; font-weight: 500; letter-spacing: -0.03em;">Loading, empty, error and success</h1>
+    </div>
+    <p style="margin: 0; max-width: 560px; font-size: 14px; color: #45566D;">Every state keeps the user’s work visible, says what happened in plain words and offers one clear next step.</p>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px;">
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <span style="font-size: 13px; color: #45566D;"><span style="font-family: 'Geist Mono', ui-monospace, monospace; color: #17253A;">F1</span> · Overview loading</span>
+      <section aria-busy="true" aria-label="Loading overview" style="height: 278px; box-sizing: border-box; border-radius: 24px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(23,37,58,0.05), 0 0 0 1px rgba(23,37,58,0.05); padding: 22px; display: flex; flex-direction: column; gap: 14px;">
+        <div style="display: flex; gap: 16px; align-items: center;"><span style="width: 84px; height: 84px; border-radius: 50%; background: #EEF2F6;"></span><span style="flex: 1; display: flex; flex-direction: column; gap: 8px;"><span style="height: 12px; width: 70%; border-radius: 6px; background: #EEF2F6;"></span><span style="height: 10px; width: 45%; border-radius: 6px; background: #EEF2F6;"></span></span></div>
+        <span style="height: 10px; border-radius: 6px; background: #EEF2F6;"></span><span style="height: 10px; width: 85%; border-radius: 6px; background: #EEF2F6;"></span><span style="height: 10px; width: 60%; border-radius: 6px; background: #EEF2F6;"></span>
+        <p style="margin: auto 0 0; font-size: 12.5px; color: #45566D;">Skeleton only after 300 ms, matching the real layout. No spinner, no fake score.</p>
+      </section>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <span style="font-size: 13px; color: #45566D;"><span style="font-family: 'Geist Mono', ui-monospace, monospace; color: #17253A;">F2</span> · Refresh failed, data kept</span>
+      <section style="height: 278px; box-sizing: border-box; border-radius: 24px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(23,37,58,0.05), 0 0 0 1px rgba(23,37,58,0.05); padding: 22px; display: flex; flex-direction: column; gap: 14px;">
+        <div role="alert" style="display: flex; align-items: center; gap: 10px; padding: 10px 10px 10px 14px; border-radius: 14px; background: #FDEDE3; font-size: 13.5px; color: #7C2D12;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9A3412" stroke-width="2.2" stroke-linecap="round" aria-hidden="true" style="flex-shrink: 0;"><circle cx="12" cy="12" r="9"></circle><path d="M12 8v5M12 16.5v.5"></path></svg><span style="flex: 1;">Couldn’t refresh. Showing what we had at 08:14.</span><button type="button" style="height: 36px; padding: 0 12px; border: none; border-radius: 9999px; background: #FFFFFF; color: #17253A; font: inherit; font-size: 13px; font-weight: 600;">Retry</button></div>
+        <div style="display: flex; align-items: baseline; gap: 8px; opacity: 0.82;"><span style="font-size: 44px; font-weight: 300; letter-spacing: -0.05em; line-height: 1;">68%</span><span style="font-size: 13px; color: #45566D;">baseline · 12 Nov</span></div>
+        <div style="display: flex; flex-direction: column; gap: 6px; opacity: 0.82; font-size: 14px;"><span>Require MFA for staff email</span><span>Set a routine for security updates</span></div>
+        <p style="margin: auto 0 0; font-size: 12.5px; color: #45566D;">Stale content is dimmed, never removed. Nothing the user saved is lost.</p>
+      </section>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <span style="font-size: 13px; color: #45566D;"><span style="font-family: 'Geist Mono', ui-monospace, monospace; color: #17253A;">F3</span> · Answer changed elsewhere</span>
+      <section style="height: 278px; box-sizing: border-box; border-radius: 24px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(23,37,58,0.05), 0 0 0 1px rgba(23,37,58,0.05); padding: 22px; display: flex; flex-direction: column; gap: 12px;">
+        <span style="font-size: 14.5px; font-weight: 500;"><span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 12.5px; color: #45566D;">Q07</span> Security updates on a routine</span>
+        <div role="alert" style="padding: 12px 14px; border-radius: 14px; background: #FBF1D9; font-size: 13.5px; color: #4A3000;"><strong style="font-weight: 600;">Tunde changed this to Partly</strong> while you were editing. Which answer should we keep?</div>
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px;">
+          <button type="button" style="height: 52px; border: none; border-radius: 14px; background: #F4F7FA; box-shadow: inset 0 0 0 1px #DCE3EB; font: inherit; font-size: 14px; color: #17253A; display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1.2;"><span style="font-weight: 600;">Keep Partly</span><span style="font-size: 12px; color: #45566D;">Tunde · 2 min ago</span></button>
+          <button type="button" style="height: 52px; border: none; border-radius: 14px; background: #075E58; font: inherit; font-size: 14px; color: #FFFFFF; display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1.2;"><span style="font-weight: 600;">Use my Yes</span><span style="font-size: 12px; color: #CDEBE7;">You · just now</span></button>
+        </div>
+        <p style="margin: auto 0 0; font-size: 12.5px; color: #45566D;">Shown on a 409. Focus moves to the message; the user’s choice stays on screen.</p>
+      </section>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <span style="font-size: 13px; color: #45566D;"><span style="font-family: 'Geist Mono', ui-monospace, monospace; color: #17253A;">F4</span> · Offline while answering</span>
+      <section style="height: 278px; box-sizing: border-box; border-radius: 24px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(23,37,58,0.05), 0 0 0 1px rgba(23,37,58,0.05); padding: 22px; display: flex; flex-direction: column; gap: 14px;">
+        <div role="status" style="display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 9999px; background: #17253A; color: #FFFFFF; font-size: 13.5px;"><span style="width: 8px; height: 8px; border-radius: 50%; background: #F2C46B;"></span><span style="flex: 1;">You’re offline. 2 answers waiting to save.</span></div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; border-radius: 12px; background: #F4F7FA; font-size: 14px;"><span>Q07 · Partly</span><span style="font-size: 12.5px; color: #7A4E00; font-weight: 600;">Not saved yet</span></div>
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; border-radius: 12px; background: #F4F7FA; font-size: 14px;"><span>Q08 · Yes</span><span style="font-size: 12.5px; color: #7A4E00; font-weight: 600;">Not saved yet</span></div>
+        </div>
+        <p style="margin: auto 0 0; font-size: 12.5px; color: #45566D;">We retry automatically when the connection returns. Leaving the page warns first.</p>
+      </section>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <span style="font-size: 13px; color: #45566D;"><span style="font-family: 'Geist Mono', ui-monospace, monospace; color: #17253A;">F5</span> · Assessment submitted</span>
+      <section role="status" style="height: 278px; box-sizing: border-box; border-radius: 24px; background: #17253A; color: #FFFFFF; box-shadow: inset 0 1px 0 rgba(255,255,255,0.08); padding: 22px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 8px;">
+        <span style="width: 52px; height: 52px; border-radius: 50%; background: #5EC4B6; display: inline-flex; align-items: center; justify-content: center;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0F1A2A" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></span>
+        <span style="font-size: 15px; color: #D8E0E8;">Submitted. Your new baseline:</span>
+        <span style="font-size: 52px; font-weight: 300; letter-spacing: -0.05em; line-height: 1;">74%</span>
+        <span style="font-size: 13px; color: #5EC4B6; font-weight: 600;">Up 6 points since 12 Nov (example)</span>
+        <a href="Actions.dc.html" style="margin-top: 6px; height: 40px; padding: 0 16px; border-radius: 9999px; background: #FFFFFF; color: #17253A; display: inline-flex; align-items: center; font-size: 13.5px; font-weight: 600; text-decoration: none;">See your updated actions</a>
+      </section>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <span style="font-size: 13px; color: #45566D;"><span style="font-family: 'Geist Mono', ui-monospace, monospace; color: #17253A;">F6</span> · Filter has no results</span>
+      <section style="height: 278px; box-sizing: border-box; border-radius: 24px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(23,37,58,0.05), 0 0 0 1px rgba(23,37,58,0.05); padding: 22px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 10px;">
+        <span style="width: 52px; height: 52px; border-radius: 16px; background: #F4F7FA; display: inline-flex; align-items: center; justify-content: center;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#45566D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16l-6 7v6l-4 2v-8z"></path></svg></span>
+        <span style="font-size: 16px; font-weight: 600;">No open Low-priority actions</span>
+        <span style="font-size: 13.5px; color: #45566D;">The one Low action is already done.</span>
+        <button type="button" style="height: 40px; padding: 0 16px; border: none; border-radius: 9999px; background: #F4F7FA; box-shadow: inset 0 0 0 1px #D5DDE6; color: #17253A; font: inherit; font-size: 13.5px; font-weight: 600;">Show all actions</button>
+      </section>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <span style="font-size: 13px; color: #45566D;"><span style="font-family: 'Geist Mono', ui-monospace, monospace; color: #17253A;">F7</span> · Every action done</span>
+      <section role="status" style="height: 278px; box-sizing: border-box; border-radius: 24px; background: #E3F0EE; padding: 22px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 10px;">
+        <svg width="64" height="64" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="28" fill="none" stroke="#075E58" stroke-width="4"></circle><path d="M20 33l8 8 16-18" fill="none" stroke="#075E58" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        <span style="font-size: 18px; font-weight: 600; color: #04403C;">All 10 actions done</span>
+        <span style="font-size: 13.5px; color: #1E4E49; max-width: 280px;">Reassess in a few months to keep your baseline current. The check draws in once, then rests.</span>
+        <a href="Assessment.dc.html" style="height: 40px; padding: 0 16px; border-radius: 9999px; background: #075E58; color: #FFFFFF; display: inline-flex; align-items: center; font-size: 13.5px; font-weight: 600; text-decoration: none;">Start a reassessment</a>
+      </section>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <span style="font-size: 13px; color: #45566D;"><span style="font-family: 'Geist Mono', ui-monospace, monospace; color: #17253A;">F8</span> · Action reopened</span>
+      <section style="height: 278px; box-sizing: border-box; border-radius: 24px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(23,37,58,0.05), 0 0 0 1px rgba(23,37,58,0.05); padding: 22px; display: flex; flex-direction: column; gap: 12px;">
+        <div style="display: flex; align-items: center; gap: 8px;"><span style="height: 26px; padding: 0 10px; border-radius: 9999px; background: #FDEDE3; color: #9A3412; font-size: 12.5px; font-weight: 600; display: inline-flex; align-items: center;">Reopened</span><span style="font-size: 14.5px; font-weight: 500;">Test restoring a file</span></div>
+        <p style="margin: 0; font-size: 13.5px; color: #45566D;">The 22 Nov assessment answered No again, so this came back. Earlier progress is kept.</p>
+        <ul style="margin: 0; padding: 0 0 0 14px; list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 13px; box-shadow: inset 2px 0 0 #DCE3EB;">
+          <li><strong style="font-weight: 600;">Reopened</strong> by assessment · 22 Nov</li>
+          <li style="color: #45566D;">Marked done by Tunde · 15 Nov</li>
+          <li style="color: #45566D;">Suggested · 12 Nov</li>
+        </ul>
+      </section>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <span style="font-size: 13px; color: #45566D;"><span style="font-family: 'Geist Mono', ui-monospace, monospace; color: #17253A;">F9</span> · Domain proof expired</span>
+      <section style="height: 278px; box-sizing: border-box; border-radius: 24px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(23,37,58,0.05), 0 0 0 1px rgba(23,37,58,0.05); padding: 22px; display: flex; flex-direction: column; gap: 12px;">
+        <span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 14px;">mail.lagosfreight.example</span>
+        <div role="alert" style="padding: 12px 14px; border-radius: 14px; background: #FDEDE3; font-size: 13.5px; color: #7C2D12;"><strong style="font-weight: 600;">Verification request expired.</strong> The TXT record wasn’t found within 7 days.</div>
+        <p style="margin: 0; font-size: 13.5px; color: #45566D;">Starting again creates a new token. Remove the old record so it doesn’t confuse anyone.</p>
+        <div style="margin-top: auto; display: flex; gap: 8px;"><button type="button" style="height: 40px; padding: 0 16px; border: none; border-radius: 9999px; background: #075E58; color: #FFFFFF; font: inherit; font-size: 13.5px; font-weight: 600;">Start again</button><button type="button" style="height: 40px; padding: 0 16px; border: none; border-radius: 9999px; background: #F4F7FA; color: #9A3412; font: inherit; font-size: 13.5px; font-weight: 600;">Remove domain</button></div>
+      </section>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <span style="font-size: 13px; color: #45566D;"><span style="font-family: 'Geist Mono', ui-monospace, monospace; color: #17253A;">F10</span> · Check inconclusive</span>
+      <section style="height: 278px; box-sizing: border-box; border-radius: 24px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(23,37,58,0.05), 0 0 0 1px rgba(23,37,58,0.05); padding: 22px; display: flex; flex-direction: column; gap: 12px;">
+        <div style="display: flex; justify-content: space-between; align-items: center;"><span style="font-size: 15px; font-weight: 600;">DMARC</span><span style="height: 26px; padding: 0 10px; border-radius: 9999px; background: #E6EDF5; color: #2F4A6B; font-size: 12.5px; font-weight: 600; display: inline-flex; align-items: center;">Inconclusive</span></div>
+        <p style="margin: 0; font-size: 13.5px;">DNS didn’t answer in time. <strong style="font-weight: 600;">This isn’t a result</strong>, and your priorities haven’t changed.</p>
+        <p style="margin: 0; font-size: 13px; color: #45566D;">Last confirmed result: Missing · 12 Nov 2026</p>
+        <div style="margin-top: auto; display: flex; gap: 8px;"><button type="button" style="height: 40px; padding: 0 16px; border: none; border-radius: 9999px; background: #17253A; color: #FFFFFF; font: inherit; font-size: 13.5px; font-weight: 600;">Check again</button></div>
+      </section>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <span style="font-size: 13px; color: #45566D;"><span style="font-family: 'Geist Mono', ui-monospace, monospace; color: #17253A;">F11</span> · Limit reached / checks paused</span>
+      <section style="height: 278px; box-sizing: border-box; border-radius: 24px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(23,37,58,0.05), 0 0 0 1px rgba(23,37,58,0.05); padding: 22px; display: flex; flex-direction: column; gap: 12px;">
+        <div style="display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 14px; background: #F4F7FA;"><span style="font-size: 26px; font-weight: 300; letter-spacing: -0.04em; line-height: 1;">0</span><span style="font-size: 13.5px; color: #45566D;">checks left today · resets at midnight WAT</span></div>
+        <button type="button" aria-disabled="true" style="height: 40px; border: none; border-radius: 9999px; background: #E6ECF2; color: #45566D; font: inherit; font-size: 13.5px; font-weight: 600;">Run a new check</button>
+        <div style="padding: 12px 14px; border-radius: 14px; box-shadow: inset 0 0 0 1px #DCE3EB; font-size: 13px; color: #45566D;"><strong style="color: #17253A; font-weight: 600;">If checks are paused service-wide:</strong> “Domain checks are paused for maintenance. Your last results are still shown.”</div>
+      </section>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <span style="font-size: 13px; color: #45566D;"><span style="font-family: 'Geist Mono', ui-monospace, monospace; color: #17253A;">F12</span> · Report revoked or no access</span>
+      <section style="height: 278px; box-sizing: border-box; border-radius: 24px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(23,37,58,0.05), 0 0 0 1px rgba(23,37,58,0.05); padding: 22px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 10px;">
+        <span style="width: 52px; height: 52px; border-radius: 16px; background: #F4F7FA; display: inline-flex; align-items: center; justify-content: center;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#45566D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg></span>
+        <span style="font-size: 16px; font-weight: 600;">This report isn’t available</span>
+        <span style="font-size: 13.5px; color: #45566D; max-width: 280px;">It may have been revoked, or you’re no longer a member of this workspace.</span>
+        <a href="Reports.dc.html" style="height: 40px; padding: 0 16px; border-radius: 9999px; background: #F4F7FA; box-shadow: inset 0 0 0 1px #D5DDE6; color: #17253A; display: inline-flex; align-items: center; font-size: 13.5px; font-weight: 600; text-decoration: none;">Go to reports</a>
+      </section>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":1500}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

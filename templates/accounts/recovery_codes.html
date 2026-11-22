@@ -1,0 +1,11 @@
+{% extends "auth_base.html" %}
+{% block title %}Save your recovery codes · AegisOne Open{% endblock %}
+{% block panel %}
+<div>
+  <h2>Save your recovery codes</h2>
+  <p class="muted">If you lose your phone, each code signs you in once. This is the only time they’re shown.</p>
+</div>
+<ul class="codes" aria-label="Recovery codes">{% for code in codes %}<li>{{ code }}</li>{% endfor %}</ul>
+<div class="alert alert-warn">Store them somewhere safe and separate from your phone, such as a password manager.</div>
+<a class="btn btn-primary lg block" href="{{ next|default:'/' }}">I’ve saved them, continue</a>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}{% block page_title %}{% endblock %} · {{ request.workspace.name }} · AegisOne Open{% endblock %}
+{% block body %}
+<header class="app-header">
+  <a class="brand" href="{% url 'workspaces:overview' %}" aria-label="AegisOne Open home">{% include "partials/logo.html" %}<span class="brand-name">AegisOne</span></a>
+  <nav class="nav-wrap" aria-label="Workspace">
+    <div class="nav-dock">
+      <a href="{% url 'workspaces:overview' %}"{% if nav == "overview" %} aria-current="page"{% endif %}>Overview</a>
+      <span aria-disabled="true" title="Arrives in the next build slice">Assessment</span>
+      <span aria-disabled="true" title="Arrives in the next build slice">Actions</span>
+      <span aria-disabled="true" title="Arrives in a later build slice">Domains</span>
+      <span aria-disabled="true" title="Arrives in a later build slice">Reports</span>
+      {% if request.membership.is_owner %}<a href="{% url 'workspaces:members' %}"{% if nav == "settings" %} aria-current="page"{% endif %}>Settings</a>{% endif %}
+    </div>
+  </nav>
+  <div class="header-tools">
+    <details class="menu">
+      <summary class="pill-control" aria-label="Switch workspace, current: {{ request.workspace.name }}"><span class="dot"></span>{{ request.workspace.name }}</summary>
+      <div class="menu-panel">
+        {% for m in request.memberships %}
+        <form method="post" action="{% url 'workspaces:switch' %}">{% csrf_token %}
+          <input type="hidden" name="workspace_id" value="{{ m.workspace_id }}">
+          <button type="submit"{% if m.workspace_id == request.workspace.id %} aria-current="true"{% endif %}>{{ m.workspace.name }} · {{ m.get_role_display }}</button>
+        </form>
+        {% endfor %}
+      </div>
+    </details>
+    <details class="menu">
+      <summary class="avatar" aria-label="Account menu for {{ request.user.display_name }}">{{ request.user.initials }}</summary>
+      <div class="menu-panel">
+        <div class="who"><strong>{{ request.user.display_name }}</strong><span class="small muted">{{ request.user.email }}</span></div>
+        <form method="post" action="{% url 'accounts:sign_out' %}">{% csrf_token %}<button type="submit" class="danger">Sign out</button></form>
+      </div>
+    </details>
+  </div>
+</header>
+<main class="page{% block page_class %}{% endblock %}" id="main">
+  {% if messages %}
+  <div class="toast-stack" role="status" aria-live="polite">
+    {% for message in messages %}<div class="alert {% if message.tags == 'error' %}alert-error{% else %}alert-success{% endif %}">{{ message }}</div>{% endfor %}
+  </div>
+  {% endif %}
+  {% block content %}{% endblock %}
+</main>
+{% endblock %}

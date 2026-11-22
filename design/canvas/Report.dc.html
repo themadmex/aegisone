@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>AegisOne Open: Report preview</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&amp;family=Geist+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#075E58}a:hover{color:#04403C}
+a,button{transition:transform 120ms cubic-bezier(.16,1,.3,1),background-color 160ms ease,box-shadow 160ms ease}
+a:active,button:active{transform:scale(.97)}
+:focus-visible{outline:3px solid #075E58;outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #F4F7FA; color: #17253A; font-family: 'Geist', system-ui, -apple-system, 'Segoe UI', sans-serif; font-size: 16px; line-height: 1.5; -webkit-font-smoothing: antialiased;">
+  <header style="max-width: 1360px; margin: 0 auto; box-sizing: border-box; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; padding: 16px clamp(16px, 2.5vw, 36px);">
+    <a href="Main.dc.html" aria-label="AegisOne Open home" style="display: flex; align-items: center; gap: 10px; color: #17253A; text-decoration: none;">
+      <svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="#17253A"></rect><path d="M16 7l7 3v5c0 4.4-3 8.2-7 9.6-4-1.4-7-5.2-7-9.6v-5l7-3z" fill="none" stroke="#5EC4B6" stroke-width="2" stroke-linejoin="round"></path><path d="M12.8 15.6l2.2 2.2 4.2-4.4" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      <span style="font-size: 17px; font-weight: 600; letter-spacing: -0.02em;">AegisOne</span>
+    </a>
+    <nav aria-label="Workspace" style="flex: 1 1 auto; display: flex; justify-content: center; min-width: 0;">
+      <div style="display: flex; gap: 2px; padding: 4px; border-radius: 9999px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(23,37,58,0.06), 0 0 0 1px rgba(23,37,58,0.05); overflow-x: auto; scrollbar-width: none; max-width: 100%;">
+        <a href="Main.dc.html" style="flex-shrink: 0; height: 40px; padding: 0 16px; display: flex; align-items: center; border-radius: 9999px; color: #45566D; font-size: 14px; font-weight: 500; text-decoration: none; white-space: nowrap;">Overview</a>
+        <a href="Assessment.dc.html" style="flex-shrink: 0; height: 40px; padding: 0 16px; display: flex; align-items: center; border-radius: 9999px; color: #45566D; font-size: 14px; font-weight: 500; text-decoration: none; white-space: nowrap;">Assessment</a>
+        <a href="Actions.dc.html" style="flex-shrink: 0; height: 40px; padding: 0 12px 0 16px; display: flex; align-items: center; gap: 8px; border-radius: 9999px; color: #45566D; font-size: 14px; font-weight: 500; text-decoration: none; white-space: nowrap;">Actions<span style="min-width: 22px; height: 22px; padding: 0 7px; box-sizing: border-box; border-radius: 9999px; background: #FDEDE3; color: #9A3412; font-size: 12px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center;">10</span></a>
+        <a href="Domains.dc.html" style="flex-shrink: 0; height: 40px; padding: 0 16px; display: flex; align-items: center; border-radius: 9999px; color: #45566D; font-size: 14px; font-weight: 500; text-decoration: none; white-space: nowrap;">Domains</a>
+        <a href="Reports.dc.html" aria-current="page" style="flex-shrink: 0; height: 40px; padding: 0 16px; display: flex; align-items: center; border-radius: 9999px; background: #075E58; color: #FFFFFF; font-size: 14px; font-weight: 500; text-decoration: none; white-space: nowrap;">Reports</a>
+        <a href="Members.dc.html" style="flex-shrink: 0; height: 40px; padding: 0 16px; display: flex; align-items: center; border-radius: 9999px; color: #45566D; font-size: 14px; font-weight: 500; text-decoration: none; white-space: nowrap;">Settings</a>
+      </div>
+    </nav>
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <button type="button" aria-label="Switch workspace, current: Lagos Freight Co." style="height: 44px; padding: 0 12px 0 14px; border: none; border-radius: 9999px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(23,37,58,0.06), 0 0 0 1px rgba(23,37,58,0.05); color: #17253A; font: inherit; font-size: 14px; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 8px; white-space: nowrap;"><span style="width: 8px; height: 8px; border-radius: 50%; background: #075E58;"></span>Lagos Freight Co.<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#45566D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 9l4-4 4 4M8 15l4 4 4-4"></path></svg></button>
+      <button type="button" aria-label="Notifications, 2 new" style="position: relative; width: 44px; height: 44px; border: none; border-radius: 50%; background: #FFFFFF; box-shadow: 0 1px 2px rgba(23,37,58,0.06), 0 0 0 1px rgba(23,37,58,0.05); color: #17253A; cursor: pointer; display: flex; align-items: center; justify-content: center;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9a6 6 0 1 1 12 0c0 6 2 7 2 7H4s2-1 2-7M10 20a2 2 0 0 0 4 0"></path></svg><span style="position: absolute; top: 10px; right: 11px; width: 8px; height: 8px; border-radius: 50%; background: #C2410C; box-shadow: 0 0 0 2px #FFFFFF;"></span></button>
+      <button type="button" aria-label="Account menu for Amaka Obi" style="width: 44px; height: 44px; border: none; border-radius: 50%; background: #17253A; color: #FFFFFF; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer;">AO</button>
+    </div>
+  </header>
+
+  <main style="max-width: 1000px; margin: 0 auto; box-sizing: border-box; padding: 12px clamp(16px, 2.5vw, 36px) 56px; display: flex; flex-direction: column; gap: 18px;">
+    <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px;">
+      <a href="Reports.dc.html" style="font-size: 14px; font-weight: 500; color: #45566D; text-decoration: none;">← All reports</a>
+      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px;">
+        <span style="height: 32px; padding: 0 12px; border-radius: 9999px; background: #FBF1D9; color: #5C3B00; font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px;"><span style="width: 7px; height: 7px; border-radius: 50%; background: #D9A441;"></span>Preview, not saved</span>
+        <button type="button" style="height: 44px; padding: 0 18px; border: none; border-radius: 9999px; background: #FFFFFF; box-shadow: inset 0 0 0 1px #D5DDE6; color: #17253A; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer;">Print / Save as PDF</button>
+        <button type="button" style="height: 44px; padding: 0 20px; border: none; border-radius: 9999px; background: #075E58; color: #FFFFFF; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer;">Save report</button>
+      </div>
+    </div>
+
+    <article aria-labelledby="rep-title" style="border-radius: 24px; background: #FFFFFF; box-shadow: 0 12px 32px rgba(23,37,58,0.1), 0 0 0 1px rgba(23,37,58,0.05); overflow: hidden;">
+      <div style="background: #17253A; color: #FFFFFF; padding: clamp(24px, 5vw, 48px); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 24px;">
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <span style="font-size: 12.5px; font-weight: 600; letter-spacing: 0.06em; color: #5EC4B6;">SECURITY BASELINE REPORT</span>
+          <h1 id="rep-title" style="margin: 0; font-size: 36px; font-weight: 500; letter-spacing: -0.035em; line-height: 1.1;">Lagos Freight Co.</h1>
+          <dl style="margin: 6px 0 0; display: grid; grid-template-columns: repeat(2, minmax(0, auto)); gap: 2px 18px; font-size: 13.5px;">
+            <dt style="color: #B7C3D1;">Report date</dt><dd style="margin: 0;">22 Nov 2026</dd>
+            <dt style="color: #B7C3D1;">Assessment</dt><dd style="margin: 0;">12 Nov 2026 · catalog v1</dd>
+            <dt style="color: #B7C3D1;">Prepared by</dt><dd style="margin: 0;">Amaka Obi, Owner</dd>
+          </dl>
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: flex-end; justify-content: center;">
+          <span style="font-size: 76px; font-weight: 300; letter-spacing: -0.06em; line-height: 1; font-variant-numeric: tabular-nums;">68<span style="font-size: 34px; color: #B7C3D1;">%</span></span>
+          <span style="font-size: 13px; color: #B7C3D1;">self-reported baseline · 27 of 40 points</span>
+        </div>
+      </div>
+
+      <div style="padding: clamp(24px, 5vw, 48px); display: flex; flex-direction: column; gap: 32px;">
+        <section aria-labelledby="sum-h" style="display: flex; flex-direction: column; gap: 8px;">
+          <h2 id="sum-h" style="margin: 0; font-size: 18px; font-weight: 600;">Summary</h2>
+          <p style="margin: 0; font-size: 15.5px; max-width: 70ch;">Accounts are in good shape. The biggest gaps are in backups and email fraud: no restore has been tested and payment-detail changes aren’t confirmed by phone. One backup answer was Unsure and should be checked first. Yes earns 2, Partly 1, No and Unsure 0.</p>
+        </section>
+
+        <section aria-labelledby="sec-h" style="display: flex; flex-direction: column; gap: 12px;">
+          <h2 id="sec-h" style="margin: 0; font-size: 18px; font-weight: 600;">Answers by section</h2>
+          <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; font-size: 15px; min-width: 560px;">
+              <thead>
+                <tr style="text-align: left; color: #45566D; font-size: 13px;">
+                  <th scope="col" style="padding: 8px 8px 8px 0; border-bottom: 1px solid #DCE3EB; font-weight: 500;">Section</th>
+                  <th scope="col" style="padding: 8px; border-bottom: 1px solid #DCE3EB; font-weight: 500; width: 34%;">Score</th>
+                  <th scope="col" style="padding: 8px; border-bottom: 1px solid #DCE3EB; font-weight: 500; text-align: right;">Yes</th>
+                  <th scope="col" style="padding: 8px; border-bottom: 1px solid #DCE3EB; font-weight: 500; text-align: right;">Partly</th>
+                  <th scope="col" style="padding: 8px; border-bottom: 1px solid #DCE3EB; font-weight: 500; text-align: right;">No</th>
+                  <th scope="col" style="padding: 8px 0 8px 8px; border-bottom: 1px solid #DCE3EB; font-weight: 500; text-align: right;">Unsure</th>
+                </tr>
+              </thead>
+              <tbody>
+                <sc-for list="{{sections}}" as="s" hint-placeholder-count="5">
+                  <tr>
+                    <th scope="row" style="padding: 12px 8px 12px 0; border-bottom: 1px solid #EEF2F6; text-align: left; font-weight: 500;">{{s.name}}</th>
+                    <td style="padding: 12px 8px; border-bottom: 1px solid #EEF2F6;"><span style="display: flex; align-items: center; gap: 10px;"><span style="flex: 1; height: 6px; border-radius: 9999px; background: #EEF2F6; overflow: hidden;"><span style="display: block; height: 6px; border-radius: 9999px; background: {{s.color}}; width: {{s.pct}}%;"></span></span><span style="width: 38px; text-align: right; font-variant-numeric: tabular-nums; font-weight: 500;">{{s.pct}}%</span></span></td>
+                    <td style="padding: 12px 8px; border-bottom: 1px solid #EEF2F6; text-align: right; font-variant-numeric: tabular-nums;">{{s.y}}</td>
+                    <td style="padding: 12px 8px; border-bottom: 1px solid #EEF2F6; text-align: right; font-variant-numeric: tabular-nums;">{{s.p}}</td>
+                    <td style="padding: 12px 8px; border-bottom: 1px solid #EEF2F6; text-align: right; font-variant-numeric: tabular-nums;">{{s.n}}</td>
+                    <td style="padding: 12px 0 12px 8px; border-bottom: 1px solid #EEF2F6; text-align: right; font-variant-numeric: tabular-nums;">{{s.u}}</td>
+                  </tr>
+                </sc-for>
+                <tr style="font-weight: 600;">
+                  <th scope="row" style="padding: 12px 8px 12px 0; text-align: left; font-weight: 600;">Total</th>
+                  <td style="padding: 12px 8px;">68%</td>
+                  <td style="padding: 12px 8px; text-align: right;">11</td>
+                  <td style="padding: 12px 8px; text-align: right;">5</td>
+                  <td style="padding: 12px 8px; text-align: right;">3</td>
+                  <td style="padding: 12px 0 12px 8px; text-align: right;">1</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section aria-labelledby="act-h" style="display: flex; flex-direction: column; gap: 12px;">
+          <h2 id="act-h" style="margin: 0; font-size: 18px; font-weight: 600;">Prioritised actions</h2>
+          <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; font-size: 15px; min-width: 560px;">
+              <thead>
+                <tr style="text-align: left; color: #45566D; font-size: 13px;">
+                  <th scope="col" style="padding: 8px 8px 8px 0; border-bottom: 1px solid #DCE3EB; font-weight: 500;">Priority</th>
+                  <th scope="col" style="padding: 8px; border-bottom: 1px solid #DCE3EB; font-weight: 500;">Action</th>
+                  <th scope="col" style="padding: 8px; border-bottom: 1px solid #DCE3EB; font-weight: 500;">Source</th>
+                  <th scope="col" style="padding: 8px 0 8px 8px; border-bottom: 1px solid #DCE3EB; font-weight: 500;">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <sc-for list="{{actions}}" as="a" hint-placeholder-count="10">
+                  <tr>
+                    <td style="padding: 10px 8px 10px 0; border-bottom: 1px solid #EEF2F6;"><span style="{{a.chip}}">{{a.priority}}</span></td>
+                    <td style="padding: 10px 8px; border-bottom: 1px solid #EEF2F6;">{{a.title}}</td>
+                    <td style="padding: 10px 8px; border-bottom: 1px solid #EEF2F6; color: #45566D; font-size: 14px;">{{a.source}}</td>
+                    <td style="padding: 10px 0 10px 8px; border-bottom: 1px solid #EEF2F6; font-size: 14px;">{{a.status}}</td>
+                  </tr>
+                </sc-for>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section aria-labelledby="ev-h" style="display: flex; flex-direction: column; gap: 10px; padding: 20px 22px; border-radius: 18px; background: #F4F7FA;">
+          <h2 id="ev-h" style="margin: 0; font-size: 18px; font-weight: 600;">Domain evidence</h2>
+          <p style="margin: 0; font-size: 15px;"><code style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 14px;">lagosfreight.example</code>, observed 12 Nov 2026 09:14 WAT via public DNS. SPF present. DMARC missing at the exact name.</p>
+          <p style="margin: 0; font-size: 13.5px; color: #45566D;">These observations show whether records exist. They don’t prove email delivery, detect vulnerabilities or confirm that a policy is enforced.</p>
+        </section>
+
+        <p style="margin: 0; padding-top: 20px; border-top: 1px solid #EEF2F6; font-size: 12.5px; color: #45566D;">Private to Lagos Freight Co. workspace members. Generated by AegisOne Open from self-reported answers and public DNS observations. Not an audit or certification.</p>
+      </div>
+    </article>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":1400}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const tone = { High: ['#FDEDE3', '#9A3412'], Medium: ['#FBF1D9', '#7A4E00'], Low: ['#E6EDF5', '#2F4A6B'] };
+    const rows = [
+      ['High', 'Require MFA for staff email', 'Answer: Partly', 'In progress'],
+      ['High', 'Set a routine for security updates', 'Answer: Partly', 'Open'],
+      ['High', 'Check who can reach your backups', 'Answer: Unsure', 'Open'],
+      ['High', 'Test restoring a file from backup', 'Answer: No', 'Open'],
+      ['High', 'Confirm payment-detail changes by phone', 'Answer: No', 'Open'],
+      ['Medium', 'Complete your device list', 'Answer: Partly', 'Open'],
+      ['Medium', 'Brief staff on unexpected links', 'Answer: Partly', 'Open'],
+      ['Medium', 'Share the escalation contact with staff', 'Answer: Partly', 'Open'],
+      ['Medium', 'Ask your provider to publish a DMARC record', 'DNS: Missing', 'Open'],
+      ['Low', 'Rehearse your incident process', 'Answer: No', 'Open']
+    ];
+    const sec = [['Accounts', 3, 1, 0, 0], ['Devices and updates', 2, 2, 0, 0], ['Backups and recovery', 2, 0, 1, 1], ['Email and phishing', 2, 1, 1, 0], ['Incident readiness', 2, 1, 1, 0]];
+    return {
+      sections: sec.map((s) => {
+        const pct = Math.round(((s[1] * 2 + s[2]) / 8) * 100);
+        return { name: s[0], y: s[1], p: s[2], n: s[3], u: s[4], pct: pct, color: pct >= 60 ? '#075E58' : '#D9A441' };
+      }),
+      actions: rows.map((r) => ({
+        priority: r[0], title: r[1], source: r[2], status: r[3],
+        chip: 'display: inline-flex; align-items: center; height: 24px; padding: 0 10px; border-radius: 9999px; font-size: 12.5px; font-weight: 600; background: ' + tone[r[0]][0] + '; color: ' + tone[r[0]][1] + ';'
+      }))
+    };
+  }
+}
+</script>
+</body>
+</html>

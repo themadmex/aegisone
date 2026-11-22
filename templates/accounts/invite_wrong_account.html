@@ -1,0 +1,14 @@
+{% extends "auth_base.html" %}
+{% block title %}This invite is for another account · AegisOne Open{% endblock %}
+{% block panel %}
+<div>
+  <h2>This invite is for another account</h2>
+  <p class="muted">Invites only work for the address they were sent to.</p>
+</div>
+<div class="card">
+  <p class="small"><span class="muted">Signed in as</span><br><strong>{{ signed_in_as }}</strong></p>
+  <p class="small"><span class="muted">Invite is for</span><br><strong>{{ invitation.email }}</strong></p>
+</div>
+<form method="post" action="{% url 'accounts:sign_out' %}">{% csrf_token %}<button type="submit" class="btn btn-primary lg block">Sign out and continue</button></form>
+<a href="{% url 'workspaces:overview' %}" class="small">Stay signed in</a>
+{% endblock %}

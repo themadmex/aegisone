@@ -1,0 +1,13 @@
+{% extends "auth_base.html" %}
+{% block title %}Choose a new password · AegisOne Open{% endblock %}
+{% block panel %}
+<div>
+  <h2>Choose a new password</h2>
+  <p class="muted">This signs you out everywhere else. You’ll still confirm with your authenticator app.</p>
+</div>
+<form method="post" novalidate class="auth-panel">
+  {% csrf_token %}
+  {% include "partials/field.html" with field=form.password %}
+  <button type="submit" class="btn btn-primary lg block">Update password</button>
+</form>
+{% endblock %}

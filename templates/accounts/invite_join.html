@@ -1,0 +1,9 @@
+{% extends "auth_base.html" %}
+{% block title %}Join {{ invitation.workspace.name }} · AegisOne Open{% endblock %}
+{% block panel %}
+<div>
+  <h2>Join {{ invitation.workspace.name }}</h2>
+  <p class="muted">You’ll join as {{ invitation.get_role_display|lower }} with your existing account, <strong>{{ invitation.email }}</strong>.</p>
+</div>
+<form method="post">{% csrf_token %}<button type="submit" class="btn btn-primary lg block">Join workspace</button></form>
+{% endblock %}

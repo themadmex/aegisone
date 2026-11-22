@@ -1,0 +1,36 @@
+{% extends "app_base.html" %}
+{% block page_title %}Overview{% endblock %}
+{% block content %}
+<div>
+  <div class="eyebrow">{{ request.workspace.name }}</div>
+  <h1 class="page-title">Welcome, {{ request.user.name|default:request.user.email }}. Let’s find your first fix.</h1>
+</div>
+
+<div class="row">
+  <section class="card navy hero grow-3" aria-labelledby="start-h">
+    <div class="hero-layout">
+      <div>
+        <span class="tag">Step 1 · about 15 minutes</span>
+        <h2 id="start-h">Answer 20 plain-English questions about how you work today.</h2>
+        <p class="muted">Accounts, devices, backups, email and incident readiness. You can stop and resume on any device, and Unsure is always an option.</p>
+        <p><span class="btn btn-accent lg" aria-disabled="true">Assessment arrives in the next build</span></p>
+      </div>
+      <div>
+        <div class="no-score" aria-hidden="true">—</div>
+        <span>No score yet. It appears when you submit.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="card grow-2" aria-labelledby="setup-h">
+    <h2 id="setup-h">Get set up</h2>
+    <ol class="checklist">
+      <li><span class="step done" aria-hidden="true">✓</span><span class="title done-title">Secure your account with two-step sign-in</span><span class="visually-hidden">Done</span></li>
+      <li><span class="step current" aria-hidden="true">2</span><span><span class="title">Take the assessment</span><span class="small muted">Gives you a score and a ranked action plan</span></span></li>
+      {% if request.membership.is_owner %}
+      <li><a href="{% url 'workspaces:members' %}"><span class="step" aria-hidden="true">3</span><span><span class="title">Invite your IT contact</span><span class="small muted">Optional · they can answer and update actions</span></span></a></li>
+      {% endif %}
+    </ol>
+  </section>
+</div>
+{% endblock %}

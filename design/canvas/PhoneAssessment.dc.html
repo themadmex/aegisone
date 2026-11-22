@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>AegisOne Open: Phone assessment</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&amp;family=Geist+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#075E58}a:hover{color:#04403C}
+a,button,label{transition:transform 120ms cubic-bezier(.16,1,.3,1),background-color 160ms ease,box-shadow 160ms ease}
+a:active,button:active,label:active{transform:scale(.98)}
+:focus-visible,label:focus-within{outline:3px solid #075E58;outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; overflow: hidden; background: #F4F7FA; color: #17253A; font-family: 'Geist', system-ui, -apple-system, 'Segoe UI', sans-serif; font-size: 16px; line-height: 1.5; -webkit-font-smoothing: antialiased; display: flex; flex-direction: column;">
+  <header style="display: flex; flex-direction: column; gap: 10px; padding: 14px 16px 6px;">
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <a href="PhoneOverview.dc.html" aria-label="Save and exit" style="width: 44px; height: 44px; border-radius: 50%; background: #FFFFFF; box-shadow: 0 1px 2px rgba(23,37,58,0.06), 0 0 0 1px rgba(23,37,58,0.05); color: #17253A; display: inline-flex; align-items: center; justify-content: center;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></a>
+      <div style="flex: 1; display: flex; flex-direction: column; line-height: 1.25;"><span style="font-size: 14px; font-weight: 600;">Devices and updates</span><span style="font-size: 12.5px; color: #45566D;">Question {{num}} of 20</span></div>
+      <span role="status" aria-live="polite" style="height: 28px; padding: 0 10px; border-radius: 9999px; background: {{statusBg}}; color: {{statusColor}}; font-size: 12px; font-weight: 600; display: inline-flex; align-items: center;">{{status}}</span>
+    </div>
+    <div style="height: 6px; border-radius: 9999px; background: #DCE3EB; overflow: hidden;"><div style="height: 6px; border-radius: 9999px; background: #075E58; width: {{pct}}%;"></div></div>
+  </header>
+
+  <main style="flex: 1; overflow: hidden; padding: 18px 16px; display: flex; flex-direction: column; gap: 16px;">
+    <div style="display: flex; flex-direction: column; gap: 8px; padding: 0 4px;">
+      <span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 12.5px; color: #45566D;">{{q.id}}</span>
+      <h1 style="margin: 0; font-size: 23px; font-weight: 500; letter-spacing: -0.025em; line-height: 1.25;">{{q.text}}</h1>
+      <p style="margin: 0; font-size: 14px; color: #45566D;">{{q.help}}</p>
+    </div>
+    <fieldset style="margin: 0; padding: 0; border: none; display: flex; flex-direction: column; gap: 10px;">
+      <legend style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0);">Answer for {{q.id}}</legend>
+      <sc-for list="{{options}}" as="o" hint-placeholder-count="4">
+        <label style="{{o.style}}">
+          <input type="radio" name="{{q.id}}" value="{{o.label}}" checked="{{o.selected}}" onChange="{{o.pick}}" style="position: absolute; opacity: 0; width: 1px; height: 1px;">
+          <span style="{{o.dot}}"></span>
+          <span style="flex: 1; display: flex; flex-direction: column; line-height: 1.25;"><span style="font-size: 16px;">{{o.label}}</span><span style="{{o.hintStyle}}">{{o.hint}}</span></span>
+        </label>
+      </sc-for>
+    </fieldset>
+  </main>
+
+  <footer style="display: flex; gap: 10px; padding: 12px 16px 24px; background: #FFFFFF; box-shadow: 0 -1px 0 #E6ECF2;">
+    <button type="button" onClick="{{prev}}" aria-disabled="{{prevDisabled}}" style="height: 52px; padding: 0 20px; border: none; border-radius: 9999px; background: #F4F7FA; color: #17253A; font: inherit; font-size: 15px; font-weight: 600;">Back</button>
+    <button type="button" onClick="{{next}}" style="flex: 1; height: 52px; border: none; border-radius: 9999px; background: #075E58; color: #FFFFFF; font: inherit; font-size: 15px; font-weight: 600;">{{nextLabel}}</button>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { i: 2, answers: { Q05: 'Partly', Q06: 'Yes' }, saving: false };
+  }
+  componentWillUnmount() { if (this.t) clearTimeout(this.t); }
+  pick(id, v) {
+    const a = Object.assign({}, this.state.answers);
+    a[id] = v;
+    this.setState({ answers: a, saving: true });
+    if (this.t) clearTimeout(this.t);
+    this.t = setTimeout(() => this.setState({ saving: false }), 600);
+  }
+  renderVals() {
+    const Q = [
+      { id: 'Q05', text: 'Do you keep a list of work computers and phones?', help: 'Every device has a named owner and the list is less than three months old.' },
+      { id: 'Q06', text: 'Do all work devices still get security updates?', help: 'Compare each device with its vendor’s support list.' },
+      { id: 'Q07', text: 'Are security updates installed on a regular routine?', help: 'Partly fits if updates happen, but only when someone remembers.' },
+      { id: 'Q08', text: 'Do work devices lock themselves when left unattended?', help: 'Check a few laptops and phones rather than assuming.' }
+    ];
+    const hints = { Yes: 'In place everywhere', Partly: 'Some of the time', No: 'Not in place', Unsure: 'Can’t confirm, so we’ll help you check' };
+    const s = this.state;
+    const q = Q[s.i];
+    const base = 'position: relative; display: flex; align-items: center; gap: 14px; min-height: 68px; padding: 10px 18px; border-radius: 20px; cursor: pointer; box-sizing: border-box;';
+    const answered = 4 + Q.filter((x) => s.answers[x.id]).length;
+    return {
+      q: q, num: 5 + s.i,
+      pct: Math.round(answered / 20 * 100),
+      status: s.saving ? 'Saving…' : 'Saved',
+      statusColor: s.saving ? '#45566D' : '#075E58',
+      statusBg: s.saving ? '#EEF2F6' : '#E3F0EE',
+      options: ['Yes', 'Partly', 'No', 'Unsure'].map((l) => {
+        const sel = s.answers[q.id] === l;
+        return {
+          label: l, hint: hints[l], selected: sel,
+          pick: () => this.pick(q.id, l),
+          style: base + (sel ? ' background: #075E58; color: #FFFFFF; font-weight: 600; box-shadow: 0 4px 12px rgba(7,94,88,0.25);' : ' background: #FFFFFF; color: #17253A; font-weight: 500; box-shadow: 0 1px 2px rgba(23,37,58,0.05), 0 0 0 1px rgba(23,37,58,0.07);'),
+          hintStyle: 'font-size: 12.5px; font-weight: 400; ' + (sel ? 'color: #CDEBE7;' : 'color: #45566D;'),
+          dot: 'flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; box-sizing: border-box; ' + (sel ? 'border: 6px solid #FFFFFF; background: #075E58;' : 'border: 1.5px solid #8796A8; background: #FFFFFF;')
+        };
+      }),
+      prevDisabled: s.i === 0 ? 'true' : 'false',
+      prev: () => { if (s.i > 0) this.setState({ i: s.i - 1 }); },
+      next: () => { if (s.i < Q.length - 1) this.setState({ i: s.i + 1 }); },
+      nextLabel: s.i < Q.length - 1 ? 'Next question' : 'Next section'
+    };
+  }
+}
+</script>
+</body>
+</html>

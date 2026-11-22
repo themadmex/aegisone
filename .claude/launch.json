@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "aegisone-web",
+      "runtimeExecutable": "uv",
+      "runtimeArgs": ["run", "python", "manage.py", "runserver", "127.0.0.1:8000", "--noreload"],
+      "env": { "DJANGO_DEBUG": "1" },
+      "port": 8000
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>AegisOne Open: Phone menu open</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#075E58}a:hover{color:#04403C}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; overflow: hidden; background: #F4F7FA; color: #17253A; font-family: 'Geist', system-ui, -apple-system, 'Segoe UI', sans-serif; font-size: 16px; line-height: 1.5; -webkit-font-smoothing: antialiased; display: flex; flex-direction: column;">
+  <header style="display: flex; align-items: center; gap: 10px; padding: 14px 16px 8px;">
+    <a href="PhoneOverview.dc.html" aria-expanded="true" aria-controls="phone-menu" style="height: 44px; padding: 0 14px 0 12px; border-radius: 9999px; background: #17253A; color: #FFFFFF; display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; text-decoration: none;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg>Close</a>
+    <span style="flex: 1; text-align: center; font-size: 15px; font-weight: 600;">Menu</span>
+    <span style="width: 44px;"></span>
+  </header>
+
+  <nav id="phone-menu" aria-label="Workspace" style="flex: 1; padding: 8px 16px 20px; display: flex; flex-direction: column; gap: 12px;">
+    <button type="button" aria-label="Switch workspace, current: Lagos Freight Co." style="display: flex; align-items: center; gap: 12px; min-height: 60px; padding: 0 14px; border: none; border-radius: 20px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(23,37,58,0.05), 0 0 0 1px rgba(23,37,58,0.05); font: inherit; color: #17253A; text-align: left;">
+      <span style="width: 36px; height: 36px; border-radius: 12px; background: #17253A; color: #FFFFFF; font-size: 14px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center;">L</span>
+      <span style="flex: 1; display: flex; flex-direction: column; line-height: 1.25;"><span style="font-size: 15px; font-weight: 600;">Lagos Freight Co.</span><span style="font-size: 12.5px; color: #45566D;">Owner · switch workspace</span></span>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#45566D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 9l4-4 4 4M8 15l4 4 4-4"></path></svg>
+    </button>
+
+    <div style="border-radius: 24px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(23,37,58,0.05), 0 0 0 1px rgba(23,37,58,0.05); padding: 6px; display: flex; flex-direction: column; gap: 2px;">
+      <a href="PhoneOverview.dc.html" aria-current="page" style="min-height: 54px; padding: 0 16px; border-radius: 18px; background: #E3F0EE; color: #075E58; display: flex; align-items: center; font-size: 16px; font-weight: 600; text-decoration: none;">Overview</a>
+      <a href="PhoneAssessment.dc.html" style="min-height: 54px; padding: 0 16px; border-radius: 18px; color: #17253A; display: flex; align-items: center; justify-content: space-between; font-size: 16px; font-weight: 500; text-decoration: none;">Assessment<span style="font-size: 13px; color: #45566D;">6 of 20</span></a>
+      <a href="Actions.dc.html" style="min-height: 54px; padding: 0 16px; border-radius: 18px; color: #17253A; display: flex; align-items: center; justify-content: space-between; font-size: 16px; font-weight: 500; text-decoration: none;">Actions<span style="min-width: 24px; height: 24px; padding: 0 8px; box-sizing: border-box; border-radius: 9999px; background: #FDEDE3; color: #9A3412; font-size: 12.5px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center;">10</span></a>
+      <a href="Domains.dc.html" style="min-height: 54px; padding: 0 16px; border-radius: 18px; color: #17253A; display: flex; align-items: center; font-size: 16px; font-weight: 500; text-decoration: none;">Domains</a>
+      <a href="Reports.dc.html" style="min-height: 54px; padding: 0 16px; border-radius: 18px; color: #17253A; display: flex; align-items: center; font-size: 16px; font-weight: 500; text-decoration: none;">Reports</a>
+      <a href="Members.dc.html" style="min-height: 54px; padding: 0 16px; border-radius: 18px; color: #17253A; display: flex; align-items: center; font-size: 16px; font-weight: 500; text-decoration: none;">Settings</a>
+    </div>
+
+    <div style="border-radius: 24px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(23,37,58,0.05), 0 0 0 1px rgba(23,37,58,0.05); padding: 6px; display: flex; flex-direction: column; gap: 2px;">
+      <div style="display: flex; align-items: center; gap: 12px; padding: 12px 16px;"><span style="width: 36px; height: 36px; border-radius: 50%; background: #17253A; color: #FFFFFF; font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center;">AO</span><span style="display: flex; flex-direction: column; line-height: 1.25;"><span style="font-size: 15px; font-weight: 600;">Amaka Obi</span><span style="font-size: 12.5px; color: #45566D;">amaka@lagosfreight.example</span></span></div>
+      <a href="#help" style="min-height: 48px; padding: 0 16px; border-radius: 16px; color: #17253A; display: flex; align-items: center; font-size: 15px; text-decoration: none;">Help and support</a>
+      <a href="SignIn.dc.html" style="min-height: 48px; padding: 0 16px; border-radius: 16px; color: #9A3412; display: flex; align-items: center; font-size: 15px; font-weight: 500; text-decoration: none;">Sign out</a>
+    </div>
+    <p style="margin: auto 4px 0; font-size: 12.5px; color: #45566D;">Opens below the header, not as a drawer. Focus starts on the current page; Esc or Close returns to the Menu button.</p>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

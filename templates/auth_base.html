@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="auth">
+  <section class="auth-brand" aria-label="About AegisOne Open">
+    <div class="brand">{% include "partials/logo.html" with size=36 fill="#0F1A2A" %}<span class="brand-name">AegisOne <em>Open</em></span></div>
+    <div>
+      <h1>Know what to fix <span>first</span>.</h1>
+      <p>A 20-question security check for small businesses, turned into a plan your team can act on this week.</p>
+    </div>
+    <ul>
+      <li>Open source and self-hostable</li>
+      <li>Your answers stay private to your workspace</li>
+      <li>No device agents, no scanning</li>
+    </ul>
+  </section>
+  <main class="auth-main" id="main">
+    <div class="auth-panel">
+      {% block panel %}{% endblock %}
+      <p class="auth-footer">Privacy · Terms · Report a vulnerability</p>
+    </div>
+  </main>
+</div>
+{% endblock %}

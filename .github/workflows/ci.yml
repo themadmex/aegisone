@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    services:
+      postgres:
+        image: postgres:17.6-bookworm
+        env:
+          POSTGRES_PASSWORD: postgres_superuser_dev
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 3s --health-timeout 3s --health-retries 20
+    env:
+      DB_HOST: 127.0.0.1
+      DB_PORT: "5432"
+      DB_APP_ROLE: aegis_app
+      DB_PASSWORD: aegis_app_dev
+      DB_OWNER_PASSWORD: aegis_owner_dev
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.10.5"
+      - name: Create database roles
+        run: PGPASSWORD=postgres_superuser_dev psql -h 127.0.0.1 -U postgres -f docker/postgres/init-roles.sql
+      - name: Install
+        run: uv sync --frozen
+      - name: Migrations are complete
+        run: DJANGO_DEBUG=1 DJANGO_DB_ROLE=owner uv run python manage.py makemigrations --check --dry-run
+      - name: Deployment checks
+        run: DJANGO_SECRET_KEY=ci-only-0123456789abcdefghijklmnopqrstuvwxyz-0123456789 DB_PASSWORD=x uv run python manage.py check --deploy --fail-level WARNING
+      - name: Tests (PostgreSQL, real roles, row-level security)
+        run: uv run pytest
+      - name: Dependency audit
+        run: uvx pip-audit==2.9.0 --strict --progress-spinner off -r <(uv export --frozen --no-hashes --format requirements-txt)

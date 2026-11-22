@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>AegisOne Open: Add a domain</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&amp;family=Geist+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#075E58}a:hover{color:#04403C}
+a,button{transition:transform 120ms cubic-bezier(.16,1,.3,1),background-color 160ms ease,box-shadow 160ms ease}
+a:active,button:active{transform:scale(.97)}
+:focus-visible,label:focus-within{outline:3px solid #075E58;outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #F4F7FA; color: #17253A; font-family: 'Geist', system-ui, -apple-system, 'Segoe UI', sans-serif; font-size: 16px; line-height: 1.5; -webkit-font-smoothing: antialiased;">
+  <header style="max-width: 1360px; margin: 0 auto; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px clamp(16px, 2.5vw, 36px);">
+    <a href="Main.dc.html" aria-label="AegisOne Open home" style="display: flex; align-items: center; gap: 10px; color: #17253A; text-decoration: none;">
+      <svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="#17253A"></rect><path d="M16 7l7 3v5c0 4.4-3 8.2-7 9.6-4-1.4-7-5.2-7-9.6v-5l7-3z" fill="none" stroke="#5EC4B6" stroke-width="2" stroke-linejoin="round"></path><path d="M12.8 15.6l2.2 2.2 4.2-4.4" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      <span style="font-size: 17px; font-weight: 600; letter-spacing: -0.02em;">AegisOne</span>
+    </a>
+    <a href="Domains.dc.html" style="height: 44px; padding: 0 18px; border-radius: 9999px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(23,37,58,0.06), 0 0 0 1px rgba(23,37,58,0.05); color: #17253A; display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; text-decoration: none;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg>Close</a>
+  </header>
+
+  <main style="max-width: 760px; margin: 0 auto; box-sizing: border-box; padding: 12px clamp(16px, 2.5vw, 36px) 56px; display: flex; flex-direction: column; gap: 22px;">
+    <div style="text-align: center;">
+      <div style="font-size: 13px; color: #45566D;">Domains · step {{step}} of 3</div>
+      <h1 style="margin: 6px 0 0; font-size: clamp(28px, 2.6vw, 36px); font-weight: 500; letter-spacing: -0.035em; line-height: 1.1;">{{heading}}</h1>
+    </div>
+
+    <ol aria-label="Steps" style="margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px;">
+      <sc-for list="{{steps}}" as="s" hint-placeholder-count="3">
+        <li aria-current="{{s.cur}}" style="display: flex; flex-direction: column; gap: 8px;">
+          <span style="{{s.bar}}"></span>
+          <span style="{{s.labelStyle}}">{{s.label}}</span>
+        </li>
+      </sc-for>
+    </ol>
+
+    <section style="border-radius: 24px; background: #FFFFFF; box-shadow: 0 4px 12px rgba(23,37,58,0.07), 0 0 0 1px rgba(23,37,58,0.05); padding: clamp(22px, 4vw, 36px); display: flex; flex-direction: column; gap: 20px;">
+      <sc-if value="{{isStep1}}" hint-placeholder-val="{{ true }}">
+        <div style="display: flex; flex-direction: column; gap: 20px;">
+          <label style="display: flex; flex-direction: column; gap: 8px; border-radius: 14px; outline-offset: 4px;">
+            <span style="font-size: 14px; font-weight: 600;">Domain name</span>
+            <input type="text" value="{{domain}}" onChange="{{onDomain}}" placeholder="yourcompany.com" autocomplete="off" spellcheck="false" style="height: 52px; padding: 0 16px; border: none; border-radius: 14px; background: #F4F7FA; box-shadow: inset 0 0 0 1px #D5DDE6; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 16px; color: #17253A; outline: none;">
+            <span style="font-size: 13px; color: #45566D;">Enter the exact name. Subdomains are checked separately.</span>
+          </label>
+          <label style="display: flex; align-items: flex-start; gap: 12px; padding: 16px; border-radius: 16px; background: #F4F7FA; cursor: pointer;">
+            <input type="checkbox" checked="{{sends}}" onChange="{{toggleSends}}" style="margin: 2px 0 0; width: 20px; height: 20px; accent-color: #075E58; flex-shrink: 0;">
+            <span style="display: flex; flex-direction: column;"><span style="font-size: 15px; font-weight: 600;">This domain sends our email</span><span style="font-size: 13.5px; color: #45566D;">Missing records only become actions for domains that send mail.</span></span>
+          </label>
+          <label style="display: flex; align-items: flex-start; gap: 12px; padding: 16px; border-radius: 16px; box-shadow: inset 0 0 0 1.5px {{attestRing}}; cursor: pointer;">
+            <input type="checkbox" checked="{{attest}}" onChange="{{toggleAttest}}" style="margin: 2px 0 0; width: 20px; height: 20px; accent-color: #075E58; flex-shrink: 0;">
+            <span style="display: flex; flex-direction: column;"><span style="font-size: 15px; font-weight: 600;">I’m authorised to check this domain for Lagos Freight Co.</span><span style="font-size: 13.5px; color: #45566D;">We record who confirmed this and when. You’ll still prove control in the next step.</span></span>
+          </label>
+          <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px;">
+            <span style="font-size: 13px; color: #45566D;">{{step1Hint}}</span>
+            <button type="button" onClick="{{toStep2}}" aria-disabled="{{step1Disabled}}" style="{{step1Btn}}">Continue</button>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{isStep2}}" hint-placeholder-val="{{ false }}">
+        <div style="display: flex; flex-direction: column; gap: 18px;">
+          <p style="margin: 0; font-size: 15px;">Add this <strong style="font-weight: 600;">TXT record</strong> in your DNS settings, or send it to whoever manages your domain.</p>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding: 8px 8px 8px 18px; border-radius: 16px; background: #F4F7FA;">
+              <span style="flex: 0 0 56px; font-size: 13px; color: #45566D;">Name</span>
+              <code style="flex: 1 1 260px; min-width: 0; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 14px; overflow-wrap: anywhere;">_aegisone-verify.{{domainShown}}</code>
+              <button type="button" onClick="{{copyName}}" style="height: 40px; padding: 0 16px; border: none; border-radius: 9999px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(23,37,58,0.1); color: #17253A; font: inherit; font-size: 13.5px; font-weight: 600; cursor: pointer;">{{copyNameLabel}}</button>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding: 8px 8px 8px 18px; border-radius: 16px; background: #F4F7FA;">
+              <span style="flex: 0 0 56px; font-size: 13px; color: #45566D;">Value</span>
+              <code style="flex: 1 1 260px; min-width: 0; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 14px; overflow-wrap: anywhere;">aegisone-verify=[ONE-TIME TOKEN]</code>
+              <button type="button" onClick="{{copyValue}}" style="height: 40px; padding: 0 16px; border: none; border-radius: 9999px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(23,37,58,0.1); color: #17253A; font: inherit; font-size: 13.5px; font-weight: 600; cursor: pointer;">{{copyValueLabel}}</button>
+            </div>
+          </div>
+          <div style="display: flex; gap: 10px; padding: 14px 16px; border-radius: 16px; background: #E6EDF5; color: #1F3550; font-size: 13.5px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2F4A6B" stroke-width="2" stroke-linecap="round" aria-hidden="true" style="flex-shrink: 0; margin-top: 1px;"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v5M12 8v.5"></path></svg>
+            <span>DNS changes can take a few minutes or up to a day. You can close this page; the request stays open for 7 days.</span>
+          </div>
+          <span role="status" aria-live="polite" style="min-height: 20px; font-size: 14px; color: #45566D;">{{checkMsg}}</span>
+          <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px;">
+            <button type="button" onClick="{{back}}" style="height: 48px; padding: 0 20px; border: none; border-radius: 9999px; background: #F4F7FA; color: #17253A; font: inherit; font-size: 15px; font-weight: 600; cursor: pointer;">Back</button>
+            <button type="button" onClick="{{check}}" style="height: 48px; padding: 0 24px; border: none; border-radius: 9999px; background: #075E58; color: #FFFFFF; font: inherit; font-size: 15px; font-weight: 600; cursor: pointer;">{{checkLabel}}</button>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{isStep3}}" hint-placeholder-val="{{ false }}">
+        <div style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 14px; padding: 12px 0;">
+          <span style="width: 72px; height: 72px; border-radius: 50%; background: #E3F0EE; display: inline-flex; align-items: center; justify-content: center;"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#075E58" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></span>
+          <div style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 17px;">{{domainShown}}</div>
+          <p style="margin: 0; max-width: 440px; font-size: 15px; color: #45566D;">Control is verified until 22 Feb 2027. You can remove the TXT record now or leave it for the next re-verification.</p>
+          <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 6px;">
+            <a href="Domains.dc.html" style="height: 48px; padding: 0 20px; border-radius: 9999px; background: #F4F7FA; color: #17253A; display: inline-flex; align-items: center; font-size: 15px; font-weight: 600; text-decoration: none;">Back to domains</a>
+            <a href="Domains.dc.html" style="height: 48px; padding: 0 24px; border-radius: 9999px; background: #075E58; color: #FFFFFF; display: inline-flex; align-items: center; font-size: 15px; font-weight: 600; text-decoration: none;">Run first check</a>
+          </div>
+        </div>
+      </sc-if>
+    </section>
+
+    <p style="margin: 0; text-align: center; font-size: 13px; color: #45566D;">We only read the public SPF and DMARC records. Nothing else on your domain is contacted.</p>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":960}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { step: 1, domain: 'shop.lagosfreight.example', sends: true, attest: false, checking: false, tries: 0, copied: '' };
+  }
+  componentWillUnmount() { if (this.t) clearTimeout(this.t); if (this.c) clearTimeout(this.c); }
+  copy(which) {
+    this.setState({ copied: which });
+    if (this.c) clearTimeout(this.c);
+    this.c = setTimeout(() => this.setState({ copied: '' }), 1400);
+  }
+  check() {
+    if (this.state.checking) return;
+    this.setState({ checking: true });
+    if (this.t) clearTimeout(this.t);
+    this.t = setTimeout(() => {
+      const tries = this.state.tries + 1;
+      if (tries >= 2) this.setState({ checking: false, tries: tries, step: 3 });
+      else this.setState({ checking: false, tries: tries });
+    }, 900);
+  }
+  renderVals() {
+    const s = this.state;
+    const ok = s.attest && s.domain.trim().length > 3;
+    const labels = ['Domain', 'Prove control', 'Verified'];
+    const titles = ['Add a domain', 'Prove you control it', 'Domain verified'];
+    let msg = '';
+    if (s.checking) msg = 'Looking for the record…';
+    else if (s.tries === 1 && s.step === 2) msg = 'Not found yet. That’s normal if you added it in the last few minutes. Try again shortly.';
+    return {
+      step: s.step, heading: titles[s.step - 1],
+      isStep1: s.step === 1, isStep2: s.step === 2, isStep3: s.step === 3,
+      steps: labels.map((l, i) => ({
+        label: l, cur: s.step === i + 1 ? 'step' : 'false',
+        bar: 'display: block; height: 5px; border-radius: 9999px; background: ' + (s.step > i ? '#075E58' : '#DCE3EB') + ';',
+        labelStyle: 'font-size: 13px; ' + (s.step === i + 1 ? 'color: #17253A; font-weight: 600;' : 'color: #45566D; font-weight: 500;')
+      })),
+      domain: s.domain, domainShown: s.domain.trim() || 'yourcompany.com',
+      onDomain: (e) => this.setState({ domain: e.target.value }),
+      sends: s.sends, toggleSends: () => this.setState({ sends: !s.sends }),
+      attest: s.attest, toggleAttest: () => this.setState({ attest: !s.attest }),
+      attestRing: s.attest ? '#075E58' : '#D5DDE6',
+      step1Disabled: ok ? 'false' : 'true',
+      step1Hint: ok ? 'Next: add a one-time DNS record.' : 'Tick the authorisation box to continue.',
+      step1Btn: 'height: 48px; padding: 0 26px; border: none; border-radius: 9999px; font: inherit; font-size: 15px; font-weight: 600; ' + (ok ? 'background: #075E58; color: #FFFFFF; cursor: pointer;' : 'background: #D5DDE6; color: #45566D; cursor: not-allowed;'),
+      toStep2: () => { if (ok) this.setState({ step: 2 }); },
+      back: () => this.setState({ step: 1, tries: 0 }),
+      copyName: () => this.copy('name'), copyValue: () => this.copy('value'),
+      copyNameLabel: s.copied === 'name' ? 'Copied ✓' : 'Copy',
+      copyValueLabel: s.copied === 'value' ? 'Copied ✓' : 'Copy',
+      check: () => this.check(),
+      checkLabel: s.checking ? 'Checking…' : (s.tries ? 'Check again' : 'Check verification'),
+      checkMsg: msg
+    };
+  }
+}
+</script>
+</body>
+</html>

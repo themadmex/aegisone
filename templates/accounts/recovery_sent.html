@@ -1,0 +1,10 @@
+{% extends "auth_base.html" %}
+{% block title %}Check your email · AegisOne Open{% endblock %}
+{% block panel %}
+<div class="card center-state" role="status">
+  <span class="state-icon teal" aria-hidden="true">✉</span>
+  <h2>Check your email</h2>
+  <p class="muted">If an account uses that address, a reset link is on its way. It works once and expires in 30 minutes.</p>
+  <a class="btn btn-quiet" href="{% url 'accounts:sign_in' %}">Back to sign in</a>
+</div>
+{% endblock %}

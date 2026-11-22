@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>AegisOne Open: Overview</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&amp;family=Geist+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#075E58}a:hover{color:#04403C}
+a,button{transition:transform 120ms cubic-bezier(.16,1,.3,1),background-color 160ms ease,box-shadow 160ms ease}
+a:active,button:active{transform:scale(.97)}
+:focus-visible{outline:3px solid #075E58;outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #F4F7FA; color: #17253A; font-family: 'Geist', system-ui, -apple-system, 'Segoe UI', sans-serif; font-size: 16px; line-height: 1.5; -webkit-font-smoothing: antialiased;">
+  <header style="max-width: 1360px; margin: 0 auto; box-sizing: border-box; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; padding: 16px clamp(16px, 2.5vw, 36px);">
+    <a href="Main.dc.html" aria-label="AegisOne Open home" style="display: flex; align-items: center; gap: 10px; color: #17253A; text-decoration: none;">
+      <svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="#17253A"></rect><path d="M16 7l7 3v5c0 4.4-3 8.2-7 9.6-4-1.4-7-5.2-7-9.6v-5l7-3z" fill="none" stroke="#5EC4B6" stroke-width="2" stroke-linejoin="round"></path><path d="M12.8 15.6l2.2 2.2 4.2-4.4" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      <span style="font-size: 17px; font-weight: 600; letter-spacing: -0.02em;">AegisOne</span>
+    </a>
+    <nav aria-label="Workspace" style="flex: 1 1 auto; display: flex; justify-content: center; min-width: 0;">
+      <div style="display: flex; gap: 2px; padding: 4px; border-radius: 9999px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(23,37,58,0.06), 0 0 0 1px rgba(23,37,58,0.05); overflow-x: auto; scrollbar-width: none; max-width: 100%;">
+        <a href="Main.dc.html" aria-current="page" style="flex-shrink: 0; height: 40px; padding: 0 16px; display: flex; align-items: center; border-radius: 9999px; background: #075E58; color: #FFFFFF; font-size: 14px; font-weight: 500; text-decoration: none; white-space: nowrap;">Overview</a>
+        <a href="Assessment.dc.html" style="flex-shrink: 0; height: 40px; padding: 0 16px; display: flex; align-items: center; border-radius: 9999px; color: #45566D; font-size: 14px; font-weight: 500; text-decoration: none; white-space: nowrap;">Assessment</a>
+        <a href="Actions.dc.html" style="flex-shrink: 0; height: 40px; padding: 0 12px 0 16px; display: flex; align-items: center; gap: 8px; border-radius: 9999px; color: #45566D; font-size: 14px; font-weight: 500; text-decoration: none; white-space: nowrap;">Actions<span style="min-width: 22px; height: 22px; padding: 0 7px; box-sizing: border-box; border-radius: 9999px; background: #FDEDE3; color: #9A3412; font-size: 12px; font-weight: 600; display: inline-flex; align-items: center; white-space: nowrap; justify-content: center;">10</span></a>
+        <a href="Domains.dc.html" style="flex-shrink: 0; height: 40px; padding: 0 16px; display: flex; align-items: center; border-radius: 9999px; color: #45566D; font-size: 14px; font-weight: 500; text-decoration: none; white-space: nowrap;">Domains</a>
+        <a href="Reports.dc.html" style="flex-shrink: 0; height: 40px; padding: 0 16px; display: flex; align-items: center; border-radius: 9999px; color: #45566D; font-size: 14px; font-weight: 500; text-decoration: none; white-space: nowrap;">Reports</a>
+        <a href="Members.dc.html" style="flex-shrink: 0; height: 40px; padding: 0 16px; display: flex; align-items: center; border-radius: 9999px; color: #45566D; font-size: 14px; font-weight: 500; text-decoration: none; white-space: nowrap;">Settings</a>
+      </div>
+    </nav>
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <button type="button" aria-label="Switch workspace, current: Lagos Freight Co." style="height: 44px; padding: 0 12px 0 14px; border: none; border-radius: 9999px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(23,37,58,0.06), 0 0 0 1px rgba(23,37,58,0.05); color: #17253A; font: inherit; font-size: 14px; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 8px; white-space: nowrap;"><span style="width: 8px; height: 8px; border-radius: 50%; background: #075E58;"></span>Lagos Freight Co.<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#45566D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 9l4-4 4 4M8 15l4 4 4-4"></path></svg></button>
+      <button type="button" aria-label="Notifications, 2 new" style="position: relative; width: 44px; height: 44px; border: none; border-radius: 50%; background: #FFFFFF; box-shadow: 0 1px 2px rgba(23,37,58,0.06), 0 0 0 1px rgba(23,37,58,0.05); color: #17253A; cursor: pointer; display: flex; align-items: center; justify-content: center;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9a6 6 0 1 1 12 0c0 6 2 7 2 7H4s2-1 2-7M10 20a2 2 0 0 0 4 0"></path></svg><span style="position: absolute; top: 10px; right: 11px; width: 8px; height: 8px; border-radius: 50%; background: #C2410C; box-shadow: 0 0 0 2px #FFFFFF;"></span></button>
+      <button type="button" aria-label="Account menu for Amaka Obi" style="width: 44px; height: 44px; border: none; border-radius: 50%; background: #17253A; color: #FFFFFF; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer;">AO</button>
+    </div>
+  </header>
+
+  <main style="max-width: 1360px; margin: 0 auto; box-sizing: border-box; padding: 12px clamp(16px, 2.5vw, 36px) 56px; display: flex; flex-direction: column; gap: 20px;">
+    <div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px;">
+      <div>
+        <div style="font-size: 13px; color: #45566D;">Sunday, 22 November · Lagos Freight Co.</div>
+        <h1 style="margin: 4px 0 0; font-size: clamp(28px, 2.6vw, 38px); font-weight: 500; letter-spacing: -0.035em; line-height: 1.1;">Good morning, Amaka</h1>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+        <a href="Reports.dc.html" style="height: 44px; padding: 0 18px; border-radius: 9999px; background: #FFFFFF; box-shadow: inset 0 0 0 1px #D5DDE6; color: #17253A; display: inline-flex; align-items: center; font-size: 14px; font-weight: 600; text-decoration: none;">New report</a>
+        <a href="Assessment.dc.html" style="height: 44px; padding: 0 20px; border-radius: 9999px; background: #075E58; color: #FFFFFF; display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; text-decoration: none; box-shadow: 0 1px 2px rgba(7,94,88,0.3);">Continue assessment<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: stretch;">
+      <section aria-labelledby="posture-h" style="flex: 7 1 560px; min-width: 0; border-radius: 24px; background: #17253A; color: #FFFFFF; box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 12px 32px rgba(23,37,58,0.18); padding: 28px; display: flex; flex-direction: column; justify-content: space-between; gap: 24px;">
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px;">
+          <h2 id="posture-h" style="margin: 0; font-size: 15px; font-weight: 500; color: #B7C3D1;">Security posture</h2>
+          <span style="height: 28px; padding: 0 12px; border-radius: 9999px; background: rgba(255,255,255,0.08); color: #D8E0E8; font-size: 12.5px; display: inline-flex; align-items: center;">Self-reported · 12 Nov 2026 · catalog v1</span>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 32px; align-items: center;">
+          <div style="position: relative; width: 172px; height: 172px; flex: 0 0 auto;">
+            <svg width="172" height="172" viewBox="0 0 172 172" aria-hidden="true"><circle cx="86" cy="86" r="70" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="14"></circle><circle cx="86" cy="86" r="70" fill="none" stroke="#5EC4B6" stroke-width="14" stroke-linecap="round" stroke-dasharray="299.1 439.8" transform="rotate(-90 86 86)"></circle></svg>
+            <div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+              <span style="font-size: 52px; font-weight: 300; letter-spacing: -0.05em; line-height: 1; font-variant-numeric: tabular-nums;">68<span style="font-size: 26px; color: #B7C3D1;">%</span></span>
+              <span style="font-size: 12.5px; color: #B7C3D1; margin-top: 4px;">27 of 40 points</span>
+            </div>
+          </div>
+          <ul style="flex: 1 1 260px; margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px;">
+            <sc-for list="{{sections}}" as="s" hint-placeholder-count="5">
+              <li style="display: grid; grid-template-columns: 158px minmax(0, 1fr) 44px; align-items: center; gap: 12px; font-size: 14px;">
+                <span style="color: #D8E0E8;">{{s.name}}</span>
+                <span style="height: 8px; border-radius: 9999px; background: rgba(255,255,255,0.1); overflow: hidden;"><span style="display: block; height: 8px; border-radius: 9999px; background: {{s.color}}; width: {{s.pct}}%;"></span></span>
+                <span style="text-align: right; font-variant-numeric: tabular-nums; font-weight: 500;">{{s.pct}}%</span>
+              </li>
+            </sc-for>
+          </ul>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.1);">
+          <div style="display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 14px; color: #B7C3D1;">
+            <span><strong style="color: #FFFFFF; font-weight: 600;">11</strong> Yes</span>
+            <span><strong style="color: #FFFFFF; font-weight: 600;">5</strong> Partly</span>
+            <span><strong style="color: #FFFFFF; font-weight: 600;">3</strong> No</span>
+            <span><strong style="color: #F2C46B; font-weight: 600;">1</strong> Unsure, worth checking</span>
+          </div>
+          <a href="Report.dc.html" style="color: #FFFFFF; font-size: 14px; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">View answers<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+        </div>
+      </section>
+
+      <section aria-labelledby="focus-h" style="flex: 5 1 380px; min-width: 0; border-radius: 24px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(23,37,58,0.05), 0 0 0 1px rgba(23,37,58,0.05); padding: 24px; display: flex; flex-direction: column; gap: 6px;">
+        <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin-bottom: 6px;">
+          <div>
+            <h2 id="focus-h" style="margin: 0; font-size: 18px; font-weight: 500; letter-spacing: -0.01em;">Focus this week</h2>
+            <p style="margin: 2px 0 0; font-size: 13.5px; color: #45566D;">Your three highest-priority open actions</p>
+          </div>
+          <a href="Actions.dc.html" style="font-size: 14px; font-weight: 500; color: #45566D; text-decoration: none; white-space: nowrap;">All 10 →</a>
+        </div>
+        <sc-for list="{{focus}}" as="f" hint-placeholder-count="3">
+          <a href="Actions.dc.html" style="display: flex; align-items: center; gap: 14px; padding: 14px 12px; margin: 0 -12px; border-radius: 16px; color: #17253A; text-decoration: none;">
+            <span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 12.5px; color: #45566D; width: 28px;">{{f.n}}</span>
+            <span style="flex: 1; min-width: 0; display: flex; flex-direction: column;"><span style="font-size: 15.5px; font-weight: 500;">{{f.title}}</span><span style="font-size: 13px; color: #45566D;">{{f.why}}</span></span>
+            <span style="{{f.statusStyle}}">{{f.status}}</span>
+          </a>
+        </sc-for>
+        <div style="margin-top: auto; padding: 14px 16px; border-radius: 16px; background: #F4F7FA; display: flex; align-items: center; gap: 12px; font-size: 13.5px; color: #45566D;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#075E58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><path d="M12 3l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V6l7-3z"></path></svg>
+          <span><strong style="color: #9A3412; font-weight: 600;">5 of 10</strong> actions are High priority. These three come first by priority and catalog order.</span>
+        </div>
+      </section>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 20px;">
+      <section aria-labelledby="draft-h" style="border-radius: 24px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(23,37,58,0.05), 0 0 0 1px rgba(23,37,58,0.05); padding: 22px; display: flex; flex-direction: column; gap: 14px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+          <h2 id="draft-h" style="margin: 0; font-size: 16px; font-weight: 500;">Reassessment</h2>
+          <span style="height: 26px; padding: 0 10px; border-radius: 9999px; background: #E3F0EE; color: #075E58; font-size: 12.5px; font-weight: 600; display: inline-flex; align-items: center;">Draft</span>
+        </div>
+        <div style="display: flex; align-items: baseline; gap: 6px;"><span style="font-size: 40px; font-weight: 300; letter-spacing: -0.04em; line-height: 1; font-variant-numeric: tabular-nums;">6</span><span style="font-size: 14px; color: #45566D;">of 20 answered</span></div>
+        <div style="display: flex; gap: 4px;" aria-hidden="true">
+          <span style="flex: 1; height: 6px; border-radius: 9999px; background: #075E58;"></span><span style="flex: 1; height: 6px; border-radius: 9999px; background: linear-gradient(90deg, #075E58 50%, #E6ECF2 50%);"></span><span style="flex: 1; height: 6px; border-radius: 9999px; background: #E6ECF2;"></span><span style="flex: 1; height: 6px; border-radius: 9999px; background: #E6ECF2;"></span><span style="flex: 1; height: 6px; border-radius: 9999px; background: #E6ECF2;"></span>
+        </div>
+        <p style="margin: 0; font-size: 13.5px; color: #45566D;">Saved 2 hours ago by Tunde Bello. About 10 minutes left.</p>
+        <a href="Assessment.dc.html" style="align-self: flex-start; height: 40px; padding: 0 16px; border-radius: 9999px; background: #F4F7FA; box-shadow: inset 0 0 0 1px #D5DDE6; color: #17253A; display: inline-flex; align-items: center; font-size: 14px; font-weight: 600; text-decoration: none;">Resume</a>
+      </section>
+
+      <section aria-labelledby="dom-h" style="border-radius: 24px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(23,37,58,0.05), 0 0 0 1px rgba(23,37,58,0.05); padding: 22px; display: flex; flex-direction: column; gap: 14px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+          <h2 id="dom-h" style="margin: 0; font-size: 16px; font-weight: 500;">Domains</h2>
+          <a href="Domains.dc.html" style="font-size: 14px; font-weight: 500; color: #45566D; text-decoration: none;">Manage →</a>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px; padding: 12px 14px; border-radius: 14px; background: #F4F7FA;">
+            <span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 13.5px;">lagosfreight.example</span>
+            <span style="display: flex; gap: 6px;"><span style="height: 24px; padding: 0 9px; border-radius: 9999px; background: #E3F0EE; color: #075E58; font-size: 12px; font-weight: 600; display: inline-flex; align-items: center; white-space: nowrap;">SPF ✓</span><span style="height: 24px; padding: 0 9px; border-radius: 9999px; background: #FDEDE3; color: #9A3412; font-size: 12px; font-weight: 600; display: inline-flex; align-items: center; white-space: nowrap;">DMARC missing</span></span>
+          </div>
+          <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px; padding: 12px 14px; border-radius: 14px; background: #F4F7FA;">
+            <span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 13.5px;">mail.lagosfreight.example</span>
+            <span style="height: 24px; padding: 0 9px; border-radius: 9999px; background: #FBF1D9; color: #7A4E00; font-size: 12px; font-weight: 600; display: inline-flex; align-items: center; white-space: nowrap;">Awaiting proof</span>
+          </div>
+        </div>
+        <p style="margin: 0; font-size: 13px; color: #45566D;">Last observed 12 Nov 2026, 09:14 WAT</p>
+      </section>
+
+      <section aria-labelledby="act-h" style="border-radius: 24px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(23,37,58,0.05), 0 0 0 1px rgba(23,37,58,0.05); padding: 22px; display: flex; flex-direction: column; gap: 12px;">
+        <h2 id="act-h" style="margin: 0; font-size: 16px; font-weight: 500;">Team activity</h2>
+        <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 14px;">
+          <li style="display: flex; gap: 12px; align-items: flex-start; font-size: 14px;"><span style="width: 32px; height: 32px; flex-shrink: 0; border-radius: 50%; background: #ECEBFD; color: #3F3DA8; font-size: 12px; font-weight: 600; display: inline-flex; align-items: center; white-space: nowrap; justify-content: center;">TB</span><span><strong style="font-weight: 600;">Tunde</strong> answered 2 questions in the reassessment<br><span style="font-size: 12.5px; color: #45566D;">Today, 07:41</span></span></li>
+          <li style="display: flex; gap: 12px; align-items: flex-start; font-size: 14px;"><span style="width: 32px; height: 32px; flex-shrink: 0; border-radius: 50%; background: #ECEBFD; color: #3F3DA8; font-size: 12px; font-weight: 600; display: inline-flex; align-items: center; white-space: nowrap; justify-content: center;">TB</span><span><strong style="font-weight: 600;">Tunde</strong> started “Require MFA for staff email”<br><span style="font-size: 12.5px; color: #45566D;">14 Nov</span></span></li>
+          <li style="display: flex; gap: 12px; align-items: flex-start; font-size: 14px;"><span style="width: 32px; height: 32px; flex-shrink: 0; border-radius: 50%; background: #E3F0EE; color: #075E58; font-size: 12px; font-weight: 600; display: inline-flex; align-items: center; white-space: nowrap; justify-content: center;">AO</span><span><strong style="font-weight: 600;">You</strong> saved the 12 Nov report<br><span style="font-size: 12.5px; color: #45566D;">12 Nov</span></span></li>
+        </ul>
+      </section>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":1040}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const sec = [['Accounts', 88], ['Devices and updates', 75], ['Backups', 50], ['Email and phishing', 63], ['Incident readiness', 63]];
+    const pill = 'height: 26px; padding: 0 10px; border-radius: 9999px; font-size: 12.5px; font-weight: 500; display: inline-flex; align-items: center; white-space: nowrap;';
+    return {
+      sections: sec.map((s) => ({ name: s[0], pct: s[1], color: s[1] >= 60 ? '#5EC4B6' : '#F2C46B' })),
+      focus: [
+        { n: 'Q02', title: 'Require MFA for staff email', why: 'Answered Partly · some mailboxes use a password alone', status: 'In progress', statusStyle: pill + ' background: #E3F0EE; color: #075E58;' },
+        { n: 'Q07', title: 'Set a routine for security updates', why: 'Answered Partly · updates happen, but not on a schedule', status: 'Open', statusStyle: pill + ' background: #EEF2F6; color: #17253A;' },
+        { n: 'Q10', title: 'Check who can reach your backups', why: 'Answered Unsure · start by listing who has access', status: 'Open', statusStyle: pill + ' background: #EEF2F6; color: #17253A;' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

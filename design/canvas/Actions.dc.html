@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>AegisOne Open: Actions</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&amp;family=Geist+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#075E58}a:hover{color:#04403C}
+a,button{transition:transform 120ms cubic-bezier(.16,1,.3,1),background-color 160ms ease,box-shadow 160ms ease,color 160ms ease}
+a:active,button:active{transform:scale(.97)}
+:focus-visible{outline:3px solid #075E58;outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #F4F7FA; color: #17253A; font-family: 'Geist', system-ui, -apple-system, 'Segoe UI', sans-serif; font-size: 16px; line-height: 1.5; -webkit-font-smoothing: antialiased;">
+  <header style="max-width: 1360px; margin: 0 auto; box-sizing: border-box; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; padding: 16px clamp(16px, 2.5vw, 36px);">
+    <a href="Main.dc.html" aria-label="AegisOne Open home" style="display: flex; align-items: center; gap: 10px; color: #17253A; text-decoration: none;">
+      <svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="#17253A"></rect><path d="M16 7l7 3v5c0 4.4-3 8.2-7 9.6-4-1.4-7-5.2-7-9.6v-5l7-3z" fill="none" stroke="#5EC4B6" stroke-width="2" stroke-linejoin="round"></path><path d="M12.8 15.6l2.2 2.2 4.2-4.4" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      <span style="font-size: 17px; font-weight: 600; letter-spacing: -0.02em;">AegisOne</span>
+    </a>
+    <nav aria-label="Workspace" style="flex: 1 1 auto; display: flex; justify-content: center; min-width: 0;">
+      <div style="display: flex; gap: 2px; padding: 4px; border-radius: 9999px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(23,37,58,0.06), 0 0 0 1px rgba(23,37,58,0.05); overflow-x: auto; scrollbar-width: none; max-width: 100%;">
+        <a href="Main.dc.html" style="flex-shrink: 0; height: 40px; padding: 0 16px; display: flex; align-items: center; border-radius: 9999px; color: #45566D; font-size: 14px; font-weight: 500; text-decoration: none; white-space: nowrap;">Overview</a>
+        <a href="Assessment.dc.html" style="flex-shrink: 0; height: 40px; padding: 0 16px; display: flex; align-items: center; border-radius: 9999px; color: #45566D; font-size: 14px; font-weight: 500; text-decoration: none; white-space: nowrap;">Assessment</a>
+        <a href="Actions.dc.html" aria-current="page" style="flex-shrink: 0; height: 40px; padding: 0 12px 0 16px; display: flex; align-items: center; gap: 8px; border-radius: 9999px; background: #075E58; color: #FFFFFF; font-size: 14px; font-weight: 500; text-decoration: none; white-space: nowrap;">Actions<span style="min-width: 22px; height: 22px; padding: 0 7px; box-sizing: border-box; border-radius: 9999px; background: #FFFFFF; color: #075E58; font-size: 12px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center;">{{activeCount}}</span></a>
+        <a href="Domains.dc.html" style="flex-shrink: 0; height: 40px; padding: 0 16px; display: flex; align-items: center; border-radius: 9999px; color: #45566D; font-size: 14px; font-weight: 500; text-decoration: none; white-space: nowrap;">Domains</a>
+        <a href="Reports.dc.html" style="flex-shrink: 0; height: 40px; padding: 0 16px; display: flex; align-items: center; border-radius: 9999px; color: #45566D; font-size: 14px; font-weight: 500; text-decoration: none; white-space: nowrap;">Reports</a>
+        <a href="Members.dc.html" style="flex-shrink: 0; height: 40px; padding: 0 16px; display: flex; align-items: center; border-radius: 9999px; color: #45566D; font-size: 14px; font-weight: 500; text-decoration: none; white-space: nowrap;">Settings</a>
+      </div>
+    </nav>
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <button type="button" aria-label="Switch workspace, current: Lagos Freight Co." style="height: 44px; padding: 0 12px 0 14px; border: none; border-radius: 9999px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(23,37,58,0.06), 0 0 0 1px rgba(23,37,58,0.05); color: #17253A; font: inherit; font-size: 14px; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 8px; white-space: nowrap;"><span style="width: 8px; height: 8px; border-radius: 50%; background: #075E58;"></span>Lagos Freight Co.<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#45566D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 9l4-4 4 4M8 15l4 4 4-4"></path></svg></button>
+      <button type="button" aria-label="Notifications, 2 new" style="position: relative; width: 44px; height: 44px; border: none; border-radius: 50%; background: #FFFFFF; box-shadow: 0 1px 2px rgba(23,37,58,0.06), 0 0 0 1px rgba(23,37,58,0.05); color: #17253A; cursor: pointer; display: flex; align-items: center; justify-content: center;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9a6 6 0 1 1 12 0c0 6 2 7 2 7H4s2-1 2-7M10 20a2 2 0 0 0 4 0"></path></svg><span style="position: absolute; top: 10px; right: 11px; width: 8px; height: 8px; border-radius: 50%; background: #C2410C; box-shadow: 0 0 0 2px #FFFFFF;"></span></button>
+      <button type="button" aria-label="Account menu for Amaka Obi" style="width: 44px; height: 44px; border: none; border-radius: 50%; background: #17253A; color: #FFFFFF; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer;">AO</button>
+    </div>
+  </header>
+
+  <main style="max-width: 1360px; margin: 0 auto; box-sizing: border-box; padding: 12px clamp(16px, 2.5vw, 36px) 56px; display: flex; flex-direction: column; gap: 18px;">
+    <div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px;">
+      <div>
+        <div style="font-size: 13px; color: #45566D;">From your 12 Nov assessment and domain check</div>
+        <h1 style="margin: 4px 0 0; font-size: clamp(28px, 2.6vw, 38px); font-weight: 500; letter-spacing: -0.035em; line-height: 1.1;">Actions</h1>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 14px; font-size: 14px; color: #45566D;">
+        <span><strong style="font-size: 22px; font-weight: 300; color: #17253A; letter-spacing: -0.03em;">{{openCount}}</strong> open</span>
+        <span><strong style="font-size: 22px; font-weight: 300; color: #17253A; letter-spacing: -0.03em;">{{progressCount}}</strong> in progress</span>
+        <span><strong style="font-size: 22px; font-weight: 300; color: #17253A; letter-spacing: -0.03em;">{{doneCount}}</strong> done</span>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px 12px;">
+      <label style="flex: 0 1 300px; display: flex; align-items: center; gap: 10px; height: 44px; padding: 0 16px; border-radius: 9999px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(23,37,58,0.05), 0 0 0 1px rgba(23,37,58,0.06);">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#45566D" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>
+        <input type="search" aria-label="Search actions" placeholder="Search actions" style="flex: 1; min-width: 0; border: none; outline: none; background: transparent; font: inherit; font-size: 14.5px; color: #17253A;">
+      </label>
+      <div role="group" aria-label="Filter by priority" style="display: inline-flex; gap: 2px; padding: 4px; border-radius: 9999px; background: #E6ECF2;">
+        <sc-for list="{{filters}}" as="f" hint-placeholder-count="4">
+          <button type="button" aria-pressed="{{f.pressed}}" onClick="{{f.pick}}" style="{{f.style}}">{{f.label}}</button>
+        </sc-for>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start;">
+      <section aria-label="Action list" style="flex: 1 1 380px; min-width: 0; border-radius: 24px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(23,37,58,0.05), 0 0 0 1px rgba(23,37,58,0.05); padding: 8px;">
+        <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 2px;">
+          <sc-for list="{{list}}" as="a" hint-placeholder-count="10">
+            <li>
+              <button type="button" onClick="{{a.pick}}" aria-current="{{a.cur}}" style="{{a.rowStyle}}">
+                <span style="{{a.iconStyle}}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{a.iconPath}}"></path></svg></span>
+                <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; text-align: left;"><span style="font-size: 15px; font-weight: 500;">{{a.title}}</span><span style="font-size: 12.5px; color: #45566D;">{{a.priority}} · {{a.source}}</span></span>
+                <span style="{{a.statusStyle}}">{{a.status}}</span>
+              </button>
+            </li>
+          </sc-for>
+        </ul>
+      </section>
+
+      <article aria-labelledby="detail-h" style="flex: 1.3 1 460px; min-width: 0; border-radius: 24px; background: #FFFFFF; box-shadow: 0 4px 12px rgba(23,37,58,0.07), 0 0 0 1px rgba(23,37,58,0.05); padding: 28px; display: flex; flex-direction: column; gap: 20px;">
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center;">
+            <span style="{{d.chipStyle}}">{{d.priorityLabel}}</span>
+            <span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 12.5px; color: #45566D;">{{d.area}} · {{d.key}}</span>
+          </div>
+          <h2 id="detail-h" style="margin: 0; font-size: 28px; font-weight: 500; letter-spacing: -0.025em; line-height: 1.15;">{{d.title}}</h2>
+        </div>
+
+        <div role="group" aria-label="Status" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; padding: 4px; border-radius: 16px; background: #F4F7FA;">
+          <sc-for list="{{statusOpts}}" as="o" hint-placeholder-count="3">
+            <button type="button" aria-pressed="{{o.pressed}}" onClick="{{o.pick}}" style="{{o.style}}">{{o.label}}</button>
+          </sc-for>
+        </div>
+        <span role="status" aria-live="polite" style="margin-top: -12px; min-height: 20px; font-size: 13px; color: #075E58; font-weight: 500;">{{saveMsg}}</span>
+
+        <div style="padding: 16px 18px; border-radius: 18px; background: #F4F7FA; display: flex; flex-direction: column; gap: 4px;">
+          <span style="font-size: 12.5px; font-weight: 600; color: #45566D; letter-spacing: 0.02em;">WHY THIS IS SUGGESTED</span>
+          <span style="font-size: 15px;">{{d.why}}</span>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <h3 style="margin: 0; font-size: 16px; font-weight: 600;">What to do</h3>
+          <ol style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px;">
+            <sc-for list="{{d.steps}}" as="s" hint-placeholder-count="3">
+              <li style="display: flex; gap: 12px; align-items: flex-start; font-size: 15px;"><span style="width: 26px; height: 26px; flex-shrink: 0; border-radius: 50%; background: #E3F0EE; color: #075E58; font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center;">{{s.n}}</span>{{s.text}}</li>
+            </sc-for>
+          </ol>
+        </div>
+
+        <div style="display: flex; gap: 12px; padding: 16px 18px; border-radius: 18px; box-shadow: inset 0 0 0 1px #DCE3EB;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#075E58" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0; margin-top: 2px;"><path d="M9 12l2 2 4-4"></path><circle cx="12" cy="12" r="9"></circle></svg>
+          <div style="display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 15px; font-weight: 600;">How to confirm it’s fixed</span><span style="font-size: 14.5px; color: #45566D;">{{d.confirm}}</span></div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 10px; padding-top: 4px;">
+          <h3 style="margin: 0; font-size: 14px; font-weight: 600; color: #45566D;">History</h3>
+          <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px;">
+            <sc-for list="{{d.history}}" as="h" hint-placeholder-count="2">
+              <li style="display: flex; gap: 10px; align-items: center; font-size: 14px;"><span style="{{h.avStyle}}">{{h.av}}</span><span>{{h.text}} <span style="color: #45566D;">· {{h.when}}</span></span></li>
+            </sc-for>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":1100}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { sel: 'Q02', filter: 'All', status: { Q02: 'In progress' }, saveMsg: '' };
+  }
+  componentWillUnmount() { if (this.t) clearTimeout(this.t); }
+  setStatus(key, s) {
+    const status = Object.assign({}, this.state.status);
+    status[key] = s;
+    this.setState({ status: status, saveMsg: 'Saving…' });
+    if (this.t) clearTimeout(this.t);
+    this.t = setTimeout(() => this.setState({ saveMsg: s === 'Done' ? 'Marked done. It will reopen if a later check finds the gap again.' : 'Status saved' }), 500);
+  }
+  renderVals() {
+    const A = [
+      ['Q02', 'High', 'Accounts', 'Require MFA for staff email', 'Answer: Partly', 'You answered Partly to “Is multi-factor sign-in on for every company email account?” Without it, a stolen password is enough to get in.', ['Open the user list in your email admin console.', 'Require MFA for everyone, starting with finance and directors.', 'Set a short deadline and name who staff can ask for help.'], 'Export the user list and check every active account shows MFA as enrolled.'],
+      ['Q07', 'High', 'Devices', 'Set a routine for security updates', 'Answer: Partly', 'Updates happen, but not on a schedule, so some devices fall behind on fixes.', ['Pick one day each week for updates.', 'Turn on automatic updates wherever possible.', 'Spot-check three devices each month.'], 'Three randomly chosen devices show no pending security updates.'],
+      ['Q10', 'High', 'Backups', 'Check who can reach your backups', 'Answer: Unsure', 'You weren’t sure. If everyday accounts can delete backups, so can anyone who takes over one of them.', ['List every account that can open or delete backups.', 'Remove access for everyday accounts.', 'Keep one separate login just for backups.'], 'The access list shows only the separate backup login.'],
+      ['Q11', 'High', 'Backups', 'Test restoring a file from backup', 'Answer: No', 'A backup that has never been restored may not work on the day you need it.', ['Choose a small folder of important files.', 'Restore it to a test location.', 'Write down the date and how long it took.'], 'The restored files open correctly and the test is recorded.'],
+      ['Q14', 'High', 'Email', 'Confirm payment-detail changes by phone', 'Answer: No', 'Emails asking you to pay a “new” bank account are a common fraud. A call-back stops most of them.', ['Write a one-line rule: always call back before changing payment details.', 'Use a number you already hold, never one from the email.', 'Rehearse it once with finance staff.'], 'Finance staff can describe the rule without prompting.'],
+      ['Q05', 'Medium', 'Devices', 'Complete your device list', 'Answer: Partly', 'Devices that aren’t on the list are easy to miss when updating or offboarding.', ['List every work laptop and phone.', 'Add an owner and last-checked date to each.', 'Review the list every three months.'], 'The list matches the devices actually in use.'],
+      ['Q15', 'Medium', 'Email', 'Brief staff on unexpected links', 'Answer: Partly', 'Some staff have had guidance, but not everyone.', ['Run a 10-minute briefing with real examples.', 'Show how to report a suspicious message.', 'Repeat for new joiners.'], 'Staff can name who to report suspicious email to.'],
+      ['Q18', 'Medium', 'Readiness', 'Share the escalation contact with staff', 'Answer: Partly', 'If staff don’t know who to call, incidents get reported late.', ['Name a primary and backup contact.', 'Post the contact where staff will see it.', 'Mention it in the next team meeting.'], 'Three staff asked at random can name the contact.'],
+      ['dmarc', 'Medium', 'Domain', 'Ask your provider to publish a DMARC record', 'Domain check: Missing', 'No DMARC record was found at _dmarc.lagosfreight.example, so receivers get no policy for mail claiming to be from you.', ['Send your email provider the domain name.', 'Ask for a monitoring-only policy first.', 'Run a new domain check after two days.'], 'A new domain check shows DMARC as present.'],
+      ['Q20', 'Low', 'Readiness', 'Rehearse your incident process', 'Answer: No', 'A short practice run shows gaps before a real incident does.', ['Book 30 minutes with key staff.', 'Walk through a lost-laptop scenario.', 'Write down what you would change.'], 'Notes from the rehearsal are saved with a date.']
+    ];
+    const tone = { High: ['#FDEDE3', '#9A3412', 'M12 19V5M5 12l7-7 7 7'], Medium: ['#FBF1D9', '#7A4E00', 'M5 12h14'], Low: ['#E6EDF5', '#2F4A6B', 'M12 5v14M5 12l7 7 7-7'] };
+    const st = this.state;
+    const statusOf = (k) => st.status[k] || 'Open';
+    const pill = 'flex-shrink: 0; height: 26px; padding: 0 10px; border-radius: 9999px; font-size: 12.5px; font-weight: 500; display: inline-flex; align-items: center; white-space: nowrap;';
+    const pillFor = (s) => pill + (s === 'In progress' ? ' background: #E3F0EE; color: #075E58;' : s === 'Done' ? ' background: #075E58; color: #FFFFFF;' : ' background: #EEF2F6; color: #17253A;');
+    const row = 'width: 100%; display: flex; align-items: center; gap: 12px; padding: 12px 14px; border: none; border-radius: 16px; font: inherit; color: #17253A; cursor: pointer;';
+    const counts = { All: A.length, High: 0, Medium: 0, Low: 0 };
+    A.forEach((a) => { counts[a[1]]++; });
+    const filters = ['All', 'High', 'Medium', 'Low'].map((f) => ({
+      label: f + ' · ' + counts[f], pressed: st.filter === f ? 'true' : 'false',
+      pick: () => this.setState({ filter: f }),
+      style: 'height: 36px; padding: 0 14px; border: none; border-radius: 9999px; font: inherit; font-size: 14px; cursor: pointer; ' + (st.filter === f ? 'background: #FFFFFF; color: #17253A; font-weight: 600; box-shadow: 0 1px 2px rgba(23,37,58,0.12);' : 'background: transparent; color: #45566D; font-weight: 500;')
+    }));
+    const list = A.filter((a) => st.filter === 'All' || a[1] === st.filter).map((a) => {
+      const t = tone[a[1]];
+      const s = statusOf(a[0]);
+      const cur = st.sel === a[0];
+      return {
+        key: a[0], priority: a[1], title: a[3], source: a[4], status: s,
+        cur: cur ? 'true' : 'false',
+        pick: () => this.setState({ sel: a[0], saveMsg: '' }),
+        rowStyle: row + (cur ? ' background: #E3F0EE;' : ' background: transparent;'),
+        iconStyle: 'width: 34px; height: 34px; flex-shrink: 0; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center; background: ' + t[0] + '; color: ' + t[1] + ';',
+        iconPath: t[2], statusStyle: pillFor(s)
+      };
+    });
+    const a = A.find((x) => x[0] === st.sel) || A[0];
+    const t = tone[a[1]];
+    const s = statusOf(a[0]);
+    const statusOpts = ['Open', 'In progress', 'Done'].map((o) => ({
+      label: o, pressed: s === o ? 'true' : 'false',
+      pick: () => this.setStatus(a[0], o),
+      style: 'height: 44px; border: none; border-radius: 12px; font: inherit; font-size: 14.5px; cursor: pointer; ' + (s === o ? (o === 'Done' ? 'background: #075E58; color: #FFFFFF; font-weight: 600;' : 'background: #FFFFFF; color: #17253A; font-weight: 600; box-shadow: 0 1px 3px rgba(23,37,58,0.12);') : 'background: transparent; color: #45566D; font-weight: 500;')
+    }));
+    const av = (bg, fg) => 'width: 28px; height: 28px; flex-shrink: 0; border-radius: 50%; background: ' + bg + '; color: ' + fg + '; font-size: 11px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center;';
+    const history = [{ av: 'AO', avStyle: av('#E3F0EE', '#075E58'), text: a[0] === 'dmarc' ? 'Suggested by the domain check Amaka ran' : 'Suggested by the assessment Amaka submitted', when: '12 Nov 2026' }];
+    if (s !== 'Open') history.unshift({ av: 'TB', avStyle: av('#ECEBFD', '#3F3DA8'), text: 'Tunde Bello set status to ' + s, when: a[0] === 'Q02' && s === 'In progress' ? '14 Nov 2026' : 'Just now' });
+    const all = A.map((x) => statusOf(x[0]));
+    return {
+      filters: filters, list: list, statusOpts: statusOpts, saveMsg: st.saveMsg,
+      openCount: all.filter((x) => x === 'Open').length,
+      activeCount: all.filter((x) => x !== 'Done').length,
+      progressCount: all.filter((x) => x === 'In progress').length,
+      doneCount: all.filter((x) => x === 'Done').length,
+      d: {
+        key: a[0], priority: a[1], priorityLabel: a[1] + ' priority', area: a[2], title: a[3], why: a[5], confirm: a[7],
+        chipStyle: 'height: 28px; padding: 0 12px; border-radius: 9999px; font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; background: ' + t[0] + '; color: ' + t[1] + ';',
+        steps: a[6].map((x, i) => ({ n: i + 1, text: x })),
+        history: history
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

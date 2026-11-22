@@ -1,0 +1,5 @@
+<div class="field">
+  <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+  <input class="input{% if extra %} {{ extra }}{% endif %}" type="{{ field.field.widget.input_type }}" name="{{ field.html_name }}" id="{{ field.id_for_label }}"{% if field.value and field.field.widget.input_type != "password" %} value="{{ field.value }}"{% endif %}{% for k, v in field.field.widget.attrs.items %} {{ k }}="{{ v }}"{% endfor %}{% if field.field.required %} required{% endif %}{% if field.errors %} aria-invalid="true" aria-describedby="{{ field.id_for_label }}-error"{% elif field.help_text %} aria-describedby="{{ field.id_for_label }}-help"{% endif %}>
+  {% if field.errors %}<span class="field-error" id="{{ field.id_for_label }}-error">{{ field.errors|first }}</span>{% elif field.help_text %}<span class="help" id="{{ field.id_for_label }}-help">{{ field.help_text }}</span>{% endif %}
+</div>

@@ -1,0 +1,15 @@
+{% extends "auth_base.html" %}
+{% block title %}Enter your code · AegisOne Open{% endblock %}
+{% block panel %}
+<div>
+  <h2>Enter your code</h2>
+  <p class="muted">Use the 6-digit code from your authenticator app, or one of your recovery codes.</p>
+</div>
+{% if error %}<div class="alert alert-error" role="alert">{{ error }}</div>{% endif %}
+<form method="post" novalidate class="auth-panel">
+  {% csrf_token %}
+  {% include "partials/field.html" with field=form.code extra="code" %}
+  <button type="submit" class="btn btn-primary lg block">Continue</button>
+</form>
+<form method="post" action="{% url 'accounts:sign_out' %}">{% csrf_token %}<button type="submit" class="btn btn-quiet block">Use a different account</button></form>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "auth_base.html" %}
+{% block title %}This link no longer works · AegisOne Open{% endblock %}
+{% block panel %}
+<div class="card center-state">
+  <span class="state-icon amber" aria-hidden="true">⏱</span>
+  <h2>This {% if kind == "invite" %}invite{% else %}reset{% endif %} link no longer works</h2>
+  <p class="muted">It has expired, was already used, or a newer link replaced it.</p>
+  <a class="btn btn-primary" href="{% url 'accounts:sign_in' %}">I already have an account</a>
+  <p class="small muted">{% if kind == "invite" %}Otherwise, ask the person who invited you to send a new one.{% else %}You can request another reset link from the sign-in page.{% endif %}</p>
+</div>
+{% endblock %}

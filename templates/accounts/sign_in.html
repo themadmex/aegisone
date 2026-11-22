@@ -1,0 +1,20 @@
+{% extends "auth_base.html" %}
+{% block title %}Sign in · AegisOne Open{% endblock %}
+{% block panel %}
+<div>
+  <h2>Sign in</h2>
+  <p class="muted">Pilot access is by invitation.</p>
+</div>
+{% if ended %}<div class="alert alert-info" role="status">You’ve been signed out. For your security, sessions end after 12 hours or when your password changes.</div>{% endif %}
+{% if request.GET.reset == "1" %}<div class="alert alert-success" role="status">Password updated. Sign in with your new password.</div>{% endif %}
+{% if error %}<div class="alert alert-error" role="alert">{{ error }}</div>{% endif %}
+<form method="post" novalidate class="auth-panel">
+  {% csrf_token %}
+  {% include "partials/field.html" with field=form.email %}
+  {% include "partials/field.html" with field=form.password %}
+  <button type="submit" class="btn btn-primary lg block">Continue</button>
+  <p class="small muted">Next you’ll confirm with your authenticator app. <a href="{% url 'accounts:recovery' %}">Forgot password?</a></p>
+</form>
+<div class="divider"></div>
+<p class="small muted">Have an invite? Open the link in your email to set up your account.</p>
+{% endblock %}

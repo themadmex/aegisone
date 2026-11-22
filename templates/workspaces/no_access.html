@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}No workspace access · AegisOne Open{% endblock %}
+{% block body %}
+<main class="error-page" id="main">
+  <div class="card">
+    <h1 class="page-title">You don’t have access to a workspace</h1>
+    <p class="muted">An owner may have removed you, or your invite hasn’t been accepted yet. Ask an owner to invite you again.</p>
+    <form method="post" action="{% url 'accounts:sign_out' %}">{% csrf_token %}<button type="submit" class="btn btn-secondary">Sign out</button></form>
+  </div>
+</main>
+{% endblock %}

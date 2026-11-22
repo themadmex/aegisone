@@ -1,0 +1,15 @@
+{% extends "auth_base.html" %}
+{% block title %}Join {{ invitation.workspace.name }} · AegisOne Open{% endblock %}
+{% block panel %}
+<div>
+  <h2>Join {{ invitation.workspace.name }}</h2>
+  <p class="muted">You were invited as <strong>{{ invitation.email }}</strong>{% if invitation.invited_by %} by {{ invitation.invited_by.display_name }}{% endif %}.</p>
+</div>
+<form method="post" novalidate class="auth-panel">
+  {% csrf_token %}
+  {% include "partials/field.html" with field=form.name %}
+  {% include "partials/field.html" with field=form.password %}
+  <button type="submit" class="btn btn-primary lg block">Create account</button>
+  <p class="small muted">Next you’ll set up an authenticator app.</p>
+</form>
+{% endblock %}

@@ -1,0 +1,72 @@
+{% extends "app_base.html" %}
+{% block page_title %}Members{% endblock %}
+{% block page_class %} narrow{% endblock %}
+{% block content %}
+<div class="settings">
+  <nav class="settings-nav" aria-label="Settings">
+    <h1>Settings</h1>
+    <a href="{% url 'workspaces:members' %}" aria-current="page">Members</a>
+    <span aria-disabled="true">Data and privacy</span>
+    <p class="small muted">Settings is visible to owners only.</p>
+  </nav>
+
+  <div class="settings-body">
+    <section class="card" aria-labelledby="inv-h">
+      <div>
+        <h2 id="inv-h">Invite a contributor</h2>
+        <p class="small muted">Contributors can answer the assessment, update actions and create reports. Only owners manage members and domains.</p>
+      </div>
+      <form method="post" action="{% url 'workspaces:invite' %}" class="inline-form" novalidate>
+        {% csrf_token %}
+        <div class="field">
+          <label class="visually-hidden" for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+          <input class="input" type="email" name="{{ form.email.html_name }}" id="{{ form.email.id_for_label }}" placeholder="colleague@company.com" autocomplete="off" required{% if form.email.value %} value="{{ form.email.value }}"{% endif %}{% if form.email.errors %} aria-invalid="true" aria-describedby="invite-error"{% endif %}>
+          {% if form.email.errors %}<span class="field-error" id="invite-error">{{ form.email.errors|first }}</span>{% endif %}
+        </div>
+        <button type="submit" class="btn btn-primary">Send invite</button>
+      </form>
+    </section>
+
+    <section class="card" aria-labelledby="mem-h">
+      <div class="row">
+        <h2 id="mem-h">Members</h2>
+        <span class="small muted">{{ members|length }} people · {{ pending|length }} pending</span>
+      </div>
+      <ul class="member-list">
+        {% for m in members %}
+        <li class="member">
+          <span class="avatar sm{% if m.user_id != request.user.id %} alt{% endif %}" aria-hidden="true">{{ m.user.initials }}</span>
+          <span class="who"><strong>{{ m.user.display_name }}</strong><span>{{ m.user.email }}{% if m.user_id == request.user.id %} · you{% endif %}</span></span>
+          <span class="chip {% if m.is_owner %}chip-owner{% else %}chip-neutral{% endif %}">{{ m.get_role_display }}</span>
+          <span class="meta">Joined {{ m.created_at|date:"j M Y" }}</span>
+          <span class="actions">
+            {% if m.user_id != request.user.id %}
+            <details class="confirm">
+              <summary class="btn btn-danger-outline">Remove</summary>
+              <div class="confirm-panel" role="alertdialog" aria-label="Confirm removal">
+                <p><strong>Remove {{ m.user.display_name }}?</strong> They lose access on their next click. Their past edits stay in the history.</p>
+                <form method="post" action="{% url 'workspaces:remove_member' m.id %}" class="btns">{% csrf_token %}<button type="submit" class="btn btn-danger">Remove</button></form>
+              </div>
+            </details>
+            {% endif %}
+          </span>
+        </li>
+        {% endfor %}
+        {% for i in pending %}
+        <li class="member">
+          <span class="avatar sm pending" aria-hidden="true">@</span>
+          <span class="who"><strong>{{ i.email }}</strong><span>Invitation pending</span></span>
+          <span class="chip chip-neutral">{{ i.get_role_display }}</span>
+          <span class="meta">Expires {{ i.expires_at|date:"j M, H:i" }}</span>
+          <span class="actions">
+            <form method="post" action="{% url 'workspaces:resend_invite' i.id %}">{% csrf_token %}<button type="submit" class="btn btn-quiet">Resend</button></form>
+            <form method="post" action="{% url 'workspaces:cancel_invite' i.id %}">{% csrf_token %}<button type="submit" class="btn btn-danger-outline">Cancel invite</button></form>
+          </span>
+        </li>
+        {% endfor %}
+      </ul>
+    </section>
+    <p class="small muted">A workspace always keeps at least one owner. To hand over ownership during the pilot, contact support.</p>
+  </div>
+</div>
+{% endblock %}

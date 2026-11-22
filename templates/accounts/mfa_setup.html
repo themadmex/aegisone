@@ -1,0 +1,21 @@
+{% extends "auth_base.html" %}
+{% block title %}Set up two-step sign-in · AegisOne Open{% endblock %}
+{% block panel %}
+<div>
+  <h2>Add a second step</h2>
+  <p class="muted">Every account uses an authenticator app. Scan this code, then enter the 6-digit code it shows.</p>
+</div>
+<div class="qr">
+  {{ qr_svg|safe }}
+  <div class="small">
+    <p class="muted">Can’t scan? Enter this key:</p>
+    <p class="mono">{{ key }}</p>
+  </div>
+</div>
+{% if error %}<div class="alert alert-error" role="alert">{{ error }}</div>{% endif %}
+<form method="post" novalidate class="auth-panel">
+  {% csrf_token %}
+  {% include "partials/field.html" with field=form.code extra="code" %}
+  <button type="submit" class="btn btn-primary lg block">Verify and continue</button>
+</form>
+{% endblock %}

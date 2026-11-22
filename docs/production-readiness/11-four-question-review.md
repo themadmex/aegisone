@@ -1,0 +1,23 @@
+# Four-question architecture review
+
+Gate 2 draft self-review based on the planning pack. The founder and relevant specialists still need to review the design. There is no independent verification evidence yet.
+
+| Question | Gate 2 design assessment and tradeoff | Required evidence | Owner |
+|---|---|---|---|
+| Are we building it in the most secure practical way? | Constrain domain work to manually initiated verified DNS observation. Derive permissions on the server and enforce scoped rows in the database. Narrow the worker bootstrap, protect owner/operator identities with MFA and put recovery and support access under review. The main residual risks are the job boundary and expedited account recovery | V01, V04, V06–V08 and independent review | Security |
+| Are we building it in the most efficient practical way? | A server-rendered monolith and small database-backed queue reduce browser payload and operational services. The worker isolates external latency. A one-region fixed-capacity pilot limits operating cost and availability. Profile before adding a broker, extra storage or scaling | V10–V12, query/cost baselines | Engineering + Platform |
+| What regressions could we introduce? | Catalog changes may reinterpret historical scores, permission revisions may leak scoped reads, retries may duplicate jobs/actions, schema changes may break rollback or reports, and richer UI may slow low-end devices. Version catalogs/snapshots, check revisions, exercise pooled RLS and drill compatible deploys | V02–V05, V07–V11. Treat authorization or irreversible state changes as rollback triggers | Engineering + QA |
+| What tests must pass before shipping? | Verify essential invite-to-report, direct-request authorization, DNS scope, privacy export/deletion, accessibility, performance, supply chain, alerting and recovery. Require representative staging evidence and signed operational decisions | V01–V12, release record and security retest | QA + Release |
+
+Repeat before S1–S5, at Gate 4 after verification, and immediately before Gate 6. For each checkpoint record evidence at a candidate revision, owner, impact, mitigations and acceptance decision. All later reviews are pending.
+
+## S1 · Workspace and identity (pre-slice review, 22 Nov 2026)
+
+The founder approved the scope and design and asked to start the build. This is a self-review, not an independent one.
+
+| Question | S1 answer and tradeoff | Evidence | Open risks |
+|---|---|---|---|
+| Most secure practical way? | The runtime role owns nothing and has no BYPASSRLS. Tenant tables use ENABLE + FORCE row-level security keyed to transaction-local settings, so a request with no context sees nothing. Membership is re-read on every request. Invite and recovery tokens are stored only as SHA-256 digests, are single-use, and are consumed with an atomic conditional update. Every account requires TOTP plus single-use recovery codes. Sessions have a 12-hour absolute lifetime and are revoked by a generation counter on password reset. Admin is unmounted, CSP is `'self'` only, private pages are no-store, and passwords use Argon2. | `tests/test_row_level_security.py`, `tests/test_identity_and_access.py` | TOTP secrets are stored unencrypted by django-otp (spec says encrypt): **open**. The rate-limit cache is per-process (LocMem), which is fine for one web process but must change before scaling out. No independent review yet. |
+| Most efficient practical way? | Server-rendered Django with no SPA or broker. RLS uses simple equality on indexed foreign keys. Memberships are read once per request through a single select_related. | Query count not yet measured | Measure the per-request query budget in S2 (V10). |
+| What regressions could this introduce? | Every future tenant table must enable and force RLS, or it silently ships without isolation. Default privileges grant the runtime role access to new tables automatically. Code that queries outside a transaction sees nothing, which fails closed. Composite tenant foreign keys aren't needed yet (no cross-object tenant references in S1). | — | Add a test that fails if any table with a `workspace_id` column lacks forced RLS (S2). |
+| What tests must pass? | V01 subset: MFA gate, recovery codes, invites (single-use, expiry, resend retires the old link, concurrent redemption accepts exactly one, wrong account), removal on the next request, last-owner guard, password reset ends sessions, absolute session lifetime. V08 subset: no context means no rows, cross-tenant read and write blocked, runtime-role privileges, foreign workspace switch and removal return 404. | CI run on PostgreSQL 17 | E2E browser, accessibility and staging evidence are **NOT VERIFIED**. |
