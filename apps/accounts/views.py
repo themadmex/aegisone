@@ -1,4 +1,7 @@
+import logging
+
 from django.conf import settings
+from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.core.mail import send_mail
 from django.db import transaction
@@ -11,13 +14,17 @@ from django_ratelimit.decorators import ratelimit
 
 from apps.core import audit, tokens
 from apps.workspaces import services as workspace_services
+from apps.workspaces.access import workspace_view
 
 from . import mfa
-from .forms import AcceptInviteForm, CodeForm, RecoveryRequestForm, SetPasswordForm, SignInForm
+from .forms import (
+    AcceptInviteForm, ChangePasswordForm, CodeForm, ProfileForm, RecoveryRequestForm, SetPasswordForm, SignInForm,
+)
 from .models import AccountToken, User, normalize_email
 
 SESSION_NEXT = "aegis_next"
 GENERIC_SIGN_IN_ERROR = "That email and password don’t match. Check both and try again, or reset your password."
+logger = logging.getLogger(__name__)
 
 
 def _safe_next(request, candidate):
@@ -56,6 +63,43 @@ def sign_in(request):
 def sign_out(request):
     logout(request)
     return redirect("accounts:sign_in")
+
+
+@require_http_methods(["GET", "POST"])
+@workspace_view()
+def profile(request):
+    form = ProfileForm(request.POST if request.method == "POST" else None, initial={"name": request.user.name})
+    if request.method == "POST" and form.is_valid():
+        request.user.name = form.cleaned_data["name"]
+        request.user.save(update_fields=["name"])
+        audit.record("profile.updated", actor=request.user)
+        messages.success(request, "Profile saved.")
+        return redirect("accounts:profile")
+    return _render_profile(request, form, ChangePasswordForm(request.user))
+
+
+@require_POST
+@workspace_view()
+@ratelimit(key="user", rate="10/h", method="POST", block=True)
+def change_password(request):
+    user = User.objects.select_for_update().get(pk=request.user.pk)
+    form = ChangePasswordForm(user, request.POST)
+    if not form.is_valid():
+        return _render_profile(request, ProfileForm(initial={"name": user.name}), form)
+
+    user.set_password(form.cleaned_data["new_password1"])
+    user.save(update_fields=["password"])
+    user.end_all_sessions()
+    AccountToken.objects.filter(user=user, purpose=AccountToken.PURPOSE_RECOVERY, consumed_at__isnull=True).update(
+        consumed_at=timezone.now()
+    )
+    audit.record("profile.password_changed", actor=user)
+    logout(request)
+    return redirect(f"{reverse('accounts:sign_in')}?reset=1")
+
+
+def _render_profile(request, profile_form, password_form):
+    return render(request, "accounts/profile.html", {"profile_form": profile_form, "password_form": password_form})
 
 
 @require_http_methods(["GET", "POST"])
@@ -113,20 +157,24 @@ def recovery_request(request):
         user = User.objects.filter(email=form.cleaned_data["email"], is_active=True).first()
         if user is not None:
             raw, digest = tokens.new_token()
-            AccountToken.objects.create(
-                user=user, purpose=AccountToken.PURPOSE_RECOVERY, digest=digest,
-                expires_at=timezone.now() + settings.RECOVERY_LIFETIME,
-            )
             minutes = int(settings.RECOVERY_LIFETIME.total_seconds() // 60)
-            send_mail(
-                subject="Reset your AegisOne Open password",
-                message=(
-                    f"Use this link to choose a new password: {settings.APP_BASE_URL}/recovery/{raw}\n\n"
-                    f"It works once and expires in {minutes} minutes. If you didn't ask for this, ignore this email."
-                ),
-                from_email=None, recipient_list=[user.email],
-            )
-            audit.record("recovery.requested", actor=user)
+            try:
+                with transaction.atomic():
+                    AccountToken.objects.create(
+                        user=user, purpose=AccountToken.PURPOSE_RECOVERY, digest=digest,
+                        expires_at=timezone.now() + settings.RECOVERY_LIFETIME,
+                    )
+                    send_mail(
+                        subject="Reset your AegisOne Open password",
+                        message=(
+                            f"Use this link to choose a new password: {settings.APP_BASE_URL}/recovery/{raw}\n\n"
+                            f"It works once and expires in {minutes} minutes. If you didn't ask for this, ignore this email."
+                        ),
+                        from_email=None, recipient_list=[user.email],
+                    )
+                    audit.record("recovery.requested", actor=user)
+            except OSError:
+                logger.warning("Password recovery email could not be delivered")
         # Identical response whether or not the account exists.
         return render(request, "accounts/recovery_sent.html")
     return render(request, "accounts/recovery_request.html", {"form": form})
@@ -146,10 +194,12 @@ def recovery_confirm(request, token):
     form = SetPasswordForm(request.POST or None, user=record.user)
     if request.method == "POST" and form.is_valid():
         with transaction.atomic():
+            user = User.objects.select_for_update().get(pk=record.user_id)
+            if not user.is_active:
+                return render(request, "accounts/link_unavailable.html", {"kind": "reset"}, status=410)
             consumed = AccountToken.objects.filter(pk=record.pk, consumed_at__isnull=True).update(consumed_at=now)
             if consumed != 1:
                 return render(request, "accounts/link_unavailable.html", {"kind": "reset"}, status=410)
-            user = record.user
             user.set_password(form.cleaned_data["password"])
             user.save(update_fields=["password"])
             user.end_all_sessions()

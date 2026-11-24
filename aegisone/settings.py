@@ -160,6 +160,13 @@ X_FRAME_OPTIONS = "DENY"
 
 # --- Email --------------------------------------------------------------------
 EMAIL_BACKEND = env("EMAIL_BACKEND", "django.core.mail.backends.console.EmailBackend")
+EMAIL_HOST = env("EMAIL_HOST", "localhost")
+EMAIL_PORT = int(env("EMAIL_PORT", "25"))
+EMAIL_HOST_USER = env("EMAIL_HOST_USER", "")
+EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD", "")
+EMAIL_USE_TLS = env_bool("EMAIL_USE_TLS")
+EMAIL_USE_SSL = env_bool("EMAIL_USE_SSL")
+EMAIL_TIMEOUT = float(env("EMAIL_TIMEOUT", "10"))
 DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL", "AegisOne Open <no-reply@localhost>")
 
 # --- Static files -------------------------------------------------------------

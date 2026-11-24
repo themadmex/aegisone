@@ -1,0 +1,28 @@
+{% extends "app_base.html" %}
+{% block page_title %}Profile settings{% endblock %}
+{% block content %}
+<div class="settings-body">
+  <h1 class="page-title">Profile settings</h1>
+  <section class="card" aria-labelledby="profile-heading">
+    <h2 id="profile-heading">Personal information</h2>
+    <form method="post" action="{% url 'accounts:profile' %}" class="auth-panel" novalidate>
+      {% csrf_token %}
+      {% include "partials/field.html" with field=profile_form.name %}
+      <div class="field">
+        <strong>Sign-in email</strong>
+        <span>{{ request.user.email }}</span>
+      </div>
+      <button class="btn btn-primary" type="submit">Save profile</button>
+    </form>
+  </section>
+  <section class="card" aria-labelledby="password-heading">
+    <h2 id="password-heading">Change password</h2>
+    <p class="muted">Changing your password signs you out on all devices.</p>
+    <form method="post" action="{% url 'accounts:change_password' %}" class="auth-panel" novalidate>
+      {% csrf_token %}
+      {% for field in password_form %}{% include "partials/field.html" %}{% endfor %}
+      <button class="btn btn-primary" type="submit">Change password</button>
+    </form>
+  </section>
+</div>
+{% endblock %}

@@ -29,6 +29,7 @@
       <summary class="avatar" aria-label="Account menu for {{ request.user.display_name }}">{{ request.user.initials }}</summary>
       <div class="menu-panel">
         <div class="who"><strong>{{ request.user.display_name }}</strong><span class="small muted">{{ request.user.email }}</span></div>
+        <a href="{% url 'accounts:profile' %}"{% if request.resolver_match.url_name == 'profile' or request.resolver_match.url_name == 'change_password' %} aria-current="page"{% endif %}>Profile settings</a>
         <form method="post" action="{% url 'accounts:sign_out' %}">{% csrf_token %}<button type="submit" class="danger">Sign out</button></form>
       </div>
     </details>

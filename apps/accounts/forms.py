@@ -1,5 +1,7 @@
 from django import forms
 from django.contrib.auth import password_validation
+from django.contrib.auth.forms import PasswordChangeForm
+from django.core.validators import MaxLengthValidator
 
 from .models import normalize_email
 
@@ -54,3 +56,17 @@ class RecoveryRequestForm(forms.Form):
 
     def clean_email(self):
         return normalize_email(self.cleaned_data["email"])
+
+
+class ProfileForm(forms.Form):
+    name = forms.CharField(label="Display name", max_length=120, widget=forms.TextInput(attrs={"autocomplete": "name"}))
+
+
+class ChangePasswordForm(PasswordChangeForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.max_length = 256
+            field.validators.append(MaxLengthValidator(256))
+            field.widget.attrs["maxlength"] = 256
+        self.fields["new_password1"].help_text = "At least 12 characters. A short phrase is easiest to remember."

@@ -2,6 +2,7 @@
 
 import re
 import threading
+from datetime import timedelta
 
 import pytest
 from django.core import mail
@@ -9,6 +10,7 @@ from django.db import connection, transaction
 from django.urls import reverse
 from django.utils import timezone
 
+from apps.accounts.models import AccountToken
 from apps.core import tenancy, tokens
 from apps.workspaces import services
 from apps.workspaces.models import Invitation, Membership
@@ -70,6 +72,68 @@ def test_recovery_code_works_once(client, workspace_factory):
         resp = client.post(reverse("accounts:mfa"), {"code": codes[0]})
         assert resp.status_code == expected
         client.logout()
+
+
+# --- Profile settings -----------------------------------------------------------
+
+
+def test_profile_is_mfa_gated_and_updates_only_the_signed_in_user(client, workspace_factory):
+    _, owner = workspace_factory("Alpha Ltd", "owner@alpha.example")
+    other = make_user("other@alpha.example", name="Other user")
+    url = reverse("accounts:profile")
+    assert client.get(url)["Location"].startswith(reverse("accounts:sign_in"))
+    client.force_login(owner)
+    assert client.post(url, {"name": "Too soon"})["Location"] == reverse("accounts:mfa")
+
+    sign_in_verified(client, owner)
+    assert client.get(url).status_code == 200
+    response = client.post(url, {"name": "Updated name", "user_id": other.pk, "email": other.email}, follow=True)
+    assert response.status_code == 200 and b"Profile saved." in response.content
+    owner.refresh_from_db()
+    other.refresh_from_db()
+    assert (owner.name, owner.email, other.name) == ("Updated name", "owner@alpha.example", "Other user")
+
+
+def test_profile_password_change_requires_current_password_and_revokes_sessions(client, workspace_factory):
+    _, owner = workspace_factory("Alpha Ltd", "owner@alpha.example")
+    sign_in_verified(client, owner)
+    other_session = sign_in_verified(client.__class__(), owner)
+    token = AccountToken.objects.create(
+        user=owner, purpose=AccountToken.PURPOSE_RECOVERY, digest=tokens.digest("old-recovery-link"),
+        expires_at=timezone.now() + timedelta(minutes=15),
+    )
+    url = reverse("accounts:change_password")
+    data = {
+        "old_password": "not the current password",
+        "new_password1": "new passphrase for testing",
+        "new_password2": "new passphrase for testing",
+    }
+    assert client.post(url, data).context["password_form"]["old_password"].errors
+
+    data["old_password"] = "correct horse battery staple"
+    response = client.post(url, data)
+    assert response["Location"] == reverse("accounts:sign_in") + "?reset=1"
+    owner.refresh_from_db()
+    token.refresh_from_db()
+    assert owner.check_password(data["new_password1"])
+    assert token.consumed_at is not None
+    for session in (client, other_session):
+        assert session.get(reverse("accounts:profile"))["Location"].startswith(reverse("accounts:sign_in"))
+
+
+def test_recovery_mail_failure_keeps_the_generic_response(client, workspace_factory, monkeypatch):
+    _, owner = workspace_factory("Alpha Ltd", "owner@alpha.example")
+
+    def unavailable(**kwargs):
+        raise TimeoutError
+
+    monkeypatch.setattr("apps.accounts.views.send_mail", unavailable)
+    url = reverse("accounts:recovery")
+    failed = client.post(url, {"email": owner.email})
+    unknown = client.post(url, {"email": "unknown@alpha.example"})
+    assert failed.status_code == unknown.status_code == 200
+    assert failed.templates[0].name == unknown.templates[0].name == "accounts/recovery_sent.html"
+    assert not AccountToken.objects.filter(user=owner).exists()
 
 
 # --- Invitations ----------------------------------------------------------------
