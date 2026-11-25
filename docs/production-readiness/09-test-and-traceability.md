@@ -1,6 +1,6 @@
 # Test strategy and traceability
 
-**Evidence status.** All runtime tests below are NOT VERIFIED. There is no implementation to execute. The evidence column names the future CI artifact or restricted staging record. Attach exact release, environment, command or steps, timestamp, expected and observed results, and redacted outputs. Preserve approved runs in the release record. Use representative synthetic tenants and an owned DNS fixture zone.
+**Evidence status.** See the [slice audit and verification record](16-slice-audit-and-verification.md) for local PostgreSQL, browser, install and recovery evidence. The table defines the remaining production-equivalent acceptance evidence. Preserve later approved runs in the release record. Use representative synthetic tenants and an owned DNS fixture zone.
 
 | Test | Requirements | Environment and passing behavior | Evidence / owner |
 |---|---|---|---|

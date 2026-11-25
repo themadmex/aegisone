@@ -1,0 +1,24 @@
+{% extends "app_base.html" %}
+{% block page_title %}Actions{% endblock %}
+{% block content %}
+<h1 class="page-title">Actions</h1>
+<section class="card feature-card">
+  <form method="get" class="feature-controls">
+    <div class="field"><label for="action-status">Status</label><select class="input" id="action-status" name="status">
+      <option value="">All statuses</option>{% for value, label in statuses %}<option value="{{ value }}"{% if selected == value %} selected{% endif %}>{{ label }}</option>{% endfor %}
+    </select></div>
+    <div class="field"><label for="action-priority">Priority</label><select class="input" id="action-priority" name="priority">
+      <option value="">All priorities</option>{% for value, label in priorities %}<option value="{{ value }}"{% if priority == value %} selected{% endif %}>{{ label }}</option>{% endfor %}
+    </select></div>
+    <label class="answer-choice"><input type="checkbox" name="history" value="1"{% if history %} checked{% endif %}> Include past findings</label>
+    <button class="btn btn-primary" type="submit">Apply filters</button>
+  </form>
+  <ul class="feature-list">
+    {% for action in items %}
+      <li><div><a href="{% url 'posture:action_detail' action.id %}"><strong>{{ action.title }}</strong></a><p class="muted">{{ action.reason }}</p></div><span>{{ action.get_priority_display }} · {{ action.get_status_display }}</span></li>
+    {% empty %}
+      <li>No actions match. <a href="{% url 'posture:actions' %}">Clear filters</a> or <a href="{% url 'posture:assessment' %}">open the assessment</a>.</li>
+    {% endfor %}
+  </ul>
+</section>
+{% endblock %}

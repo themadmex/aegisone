@@ -13,11 +13,14 @@
         <span class="tag">Step 1 · about 15 minutes</span>
         <h2 id="start-h">Answer 20 plain-English questions about how you work today.</h2>
         <p class="muted">Accounts, devices, backups, email and incident readiness. You can stop and resume on any device, and Unsure is always an option.</p>
-        <p><span class="btn btn-accent lg" aria-disabled="true">Assessment arrives in the next build</span></p>
+        <p><a class="btn btn-accent lg" href="{% url 'posture:assessment' %}">{% if draft %}Continue assessment{% elif latest %}Open assessment{% else %}Start assessment{% endif %}</a></p>
+        {% if draft %}<p>{{ draft.answers|length }} of 20 draft answers saved</p>{% endif %}
       </div>
       <div>
-        <div class="no-score" aria-hidden="true">—</div>
-        <span>No score yet. It appears when you submit.</span>
+        {% if latest %}
+          <div class="no-score">{{ latest.score }}%</div>
+          <p>Self-reported baseline · {{ latest.submitted_at|date:"j M Y" }} · {{ latest.unsure_count }} unsure</p>
+        {% else %}<span>No score yet. It appears when you submit.</span>{% endif %}
       </div>
     </div>
   </section>
@@ -33,4 +36,22 @@
     </ol>
   </section>
 </div>
+{% if latest %}
+<section class="card feature-card" aria-labelledby="next-actions">
+  <h2 id="next-actions">Your next actions</h2>
+  <ul class="feature-list">
+    {% for action in top_actions %}<li><a href="{% url 'posture:action_detail' action.id %}">{{ action.title }}</a><strong>{{ action.get_priority_display }}</strong></li>{% empty %}<li>No open actions based on your last assessment.</li>{% endfor %}
+  </ul>
+  <p><a href="{% url 'posture:actions' %}">View all actions</a></p>
+</section>
+{% endif %}
+{% if recent_domains %}
+<section class="card feature-card" aria-labelledby="recent-domains">
+  <h2 id="recent-domains">Recent domain observations</h2>
+  <ul class="feature-list">
+    {% for domain in recent_domains %}<li><div><strong>{{ domain.name }}</strong><p>{% for item in domain.observations %}{{ item.kind }} · {{ item.label }}{% if not forloop.last %}, {% endif %}{% endfor %}</p></div><time datetime="{{ domain.observed_at }}">{{ domain.observed_label }}</time></li>{% endfor %}
+  </ul>
+  <p><a href="{% url 'posture:domains' %}">View domains</a></p>
+</section>
+{% endif %}
 {% endblock %}

@@ -6,3 +6,7 @@ staticfiles
 design
 docs
 .env
+.env.*
+.vercel
+.claude
+SHARED_CHAT_CONTEXT.md

@@ -1,0 +1,23 @@
+{% extends "app_base.html" %}
+{% block page_title %}Action{% endblock %}
+{% block content %}
+<p><a href="{% url 'posture:actions' %}">Back to actions</a></p>
+<h1 class="page-title">{{ action.title }}</h1>
+<section class="card feature-card">
+  <p><strong>{{ action.get_priority_display }} priority · {{ action.get_status_display }}</strong></p>
+  <h2>Why this is here</h2><p>{{ action.reason }}</p>
+  <h2>What to do</h2><p>{{ action.steps }}</p>
+  <h2>How to confirm it</h2><p>{{ action.confirmation }}</p>
+  <div class="feature-controls">
+    {% for value, label in targets %}
+    <form method="post">{% csrf_token %}<input type="hidden" name="revision" value="{{ action.revision }}"><button class="btn btn-primary" name="status" value="{{ value }}" type="submit">{{ label }}</button></form>
+    {% endfor %}
+  </div>
+</section>
+<section class="card feature-card">
+  <h2>Activity</h2>
+  <ul class="feature-list">
+    {% for entry in history %}<li>{{ entry.detail }} <time datetime="{{ entry.created_at|date:'c' }}">{{ entry.created_at|date:"j M Y, H:i" }}</time></li>{% empty %}<li>No activity yet.</li>{% endfor %}
+  </ul>
+</section>
+{% endblock %}

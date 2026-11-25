@@ -1,6 +1,7 @@
+from django.conf import settings
 from django.db import connection
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.views.decorators.http import require_GET
 
 
@@ -32,3 +33,21 @@ def server_error(request):
     from django.template import loader
 
     return HttpResponse(loader.get_template("errors/500.html").render(), status=500)
+
+
+@require_GET
+def home(request):
+    """Show the public introduction, or the workspace for signed-in users."""
+    if request.user.is_authenticated:
+        from apps.workspaces.views import overview
+
+        return overview(request)
+    if settings.PUBLIC_LANDING_ENABLED:
+        return render(request, "landing.html")
+    return redirect("accounts:sign_in")
+
+
+@require_GET
+def information(request, section):
+    titles = {"help": "Help and security reporting", "privacy": "Pilot privacy information", "pilot": "Using the pilot"}
+    return render(request, "core/information.html", {"title": titles[section], "section": section})

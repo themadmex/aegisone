@@ -120,6 +120,9 @@ def accept(invitation, user):
     if normalize_email(user.email) != invitation.email:
         raise InvitationUnavailable
     tenancy.set_workspace(invitation.workspace_id)
+    workspace = Workspace.objects.select_for_update().get(pk=invitation.workspace_id)
+    if workspace.status != Workspace.ACTIVE:
+        raise InvitationUnavailable
     now = timezone.now()
     consumed = Invitation.objects.filter(
         pk=invitation.pk, consumed_at__isnull=True, retired_at__isnull=True, expires_at__gt=now

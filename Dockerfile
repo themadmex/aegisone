@@ -20,4 +20,4 @@ RUN DJANGO_DEBUG=0 DJANGO_SECRET_KEY=build-only DB_PASSWORD=x python manage.py c
 USER aegis
 
 EXPOSE 8000
-CMD ["gunicorn", "aegisone.wsgi:application", "--bind", "0.0.0.0:8000", "--workers", "1", "--threads", "4", "--access-logfile", "-"]
+CMD ["gunicorn", "aegisone.wsgi:application", "--bind", "0.0.0.0:8000", "--workers", "1", "--threads", "4", "--access-logfile", "-", "--access-logformat", "%(m)s %(s)s %(D)s"]

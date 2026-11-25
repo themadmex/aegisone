@@ -23,3 +23,5 @@ AegisOne Open helps SME owners assess basic security practices, decide what to f
 - [Four-question architecture review](11-four-question-review.md)
 - [Gate decisions and scorecard](12-release-readiness.md)
 - [Production layers](13-production-layers.md) · [Security verification](14-production-security.md) · [Website trust](15-website-trust-compliance.md)
+- [Slice audit and verification](16-slice-audit-and-verification.md)
+- [Product journey map](17-product-journey.html)

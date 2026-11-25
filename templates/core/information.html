@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}{{ title }} · AegisOne Open{% endblock %}
+{% block body %}
+<main class="page" id="main">
+  <p><a href="{% url 'home' %}">AegisOne Open</a></p>
+  <h1 class="page-title">{{ title }}</h1>
+  <section class="card feature-card">
+    {% if section == "help" %}
+      <p>Contact <a href="mailto:aegisone@echo1ict.com.ng">aegisone@echo1ict.com.ng</a> for help with pilot access or account recovery.</p>
+      <p>For a security report, send a short description and a way to reach you. Keep passwords, private reports and recovery codes out of email.</p>
+    {% elif section == "privacy" %}
+      <p>AegisOne stores workspace membership, assessment answers, related actions and reports so authorized members can access their work.</p>
+      <p>Workspace owners can request an export or closure in <a href="{% url 'posture:data_requests' %}">Data and privacy</a>. For individual data rights requests, contact <a href="mailto:aegisone@echo1ict.com.ng">aegisone@echo1ict.com.ng</a> so we can verify your identity and respond.</p>
+      <p>Optional domain checks send exact DNS names to a public resolver. The application stores the resulting observations and their dates.</p>
+    {% elif section == "pilot" %}
+      <p>AegisOne is an invitation-only pilot. Assessment scores reflect answers supplied by the workspace and are guidance for prioritizing work.</p>
+      <p>Only request optional DNS checks on domains you are authorized to manage. Contact pilot support for access questions and the applicable participation terms.</p>
+    {% endif %}
+  </section>
+</main>
+{% endblock %}

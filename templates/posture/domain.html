@@ -1,0 +1,39 @@
+{% extends "app_base.html" %}
+{% block page_title %}Domain verification{% endblock %}
+{% block content %}
+<p><a href="{% url 'posture:domains' %}">Back to domains</a></p>
+<h1 class="page-title">{{ domain.name }}</h1>
+<section class="card feature-card">
+  {% if verified %}<p>TXT proof verified until {{ domain.verified_until|date:"j M Y, H:i" }}.</p>
+  {% elif domain.revoked_at %}<p>Authorization revoked.</p>
+  {% else %}<p>Verification required.</p>{% endif %}
+  {% if may_manage and can_verify %}
+    <h2>Publish a TXT proof</h2>
+    <dl><dt>Name</dt><dd><code>_aegisone-challenge.{{ domain.name }}</code></dd><dt>Value</dt><dd><code>{{ challenge }}</code></dd></dl>
+    <p>Use the exact name shown, then request verification. The challenge expires {{ domain.challenge_expires_at|date:"j M Y, H:i" }}.</p>
+    <form method="post">{% csrf_token %}<button class="btn btn-primary" name="operation" value="verify" type="submit">Verify TXT proof</button></form>
+  {% elif may_manage and verified %}
+    <form method="post">{% csrf_token %}<button class="btn btn-primary" name="operation" value="check" type="submit">Check SPF and DMARC</button></form>
+  {% endif %}
+  {% if may_manage and not verified and not can_verify %}
+    <form method="post" class="feature-form">{% csrf_token %}
+      <label class="answer-choice"><input type="checkbox" name="attest" value="1" required> I am authorized to verify and check this domain</label>
+      <div><button class="btn btn-secondary" name="operation" value="renew" type="submit">Renew TXT proof</button></div>
+    </form>
+  {% endif %}
+  {% if request.membership.is_owner and not domain.revoked_at %}
+    <form method="post" action="{% url 'posture:domain_revoke' domain.id %}">{% csrf_token %}<button class="btn btn-secondary" type="submit">Revoke authorization</button></form>
+  {% endif %}
+</section>
+<section class="card feature-card">
+  <h2>Latest request</h2>
+  {% if latest_job %}<p>{{ latest_job.get_kind_display }} · {{ latest_job.get_status_display }}. {{ latest_job.result }}</p>
+  {% else %}<p>No DNS requests yet.</p>{% endif %}
+  <h2>Most recent DNS observations</h2>
+  {% if observed %}
+    <p>Observed {{ observed.finished_at|date:"j M Y, H:i" }} for {{ domain.name }}.</p>
+    <ul class="feature-list">{% for item in observed.observations %}<li><strong>{{ item.kind }} · {{ item.label }}</strong><span>{{ item.detail }}</span></li>{% endfor %}</ul>
+    <p>These are limited public DNS observations. Ask your email provider before changing enforcement.</p>
+  {% else %}<p>No recent DNS observations.</p>{% endif %}
+</section>
+{% endblock %}

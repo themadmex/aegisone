@@ -1,0 +1,24 @@
+{% extends "app_base.html" %}
+{% block page_title %}Assessment{% endblock %}
+{% block content %}
+<div>
+  <p class="eyebrow">Question {{ number }} of {{ total }} · {{ item.section }}</p>
+  <h1 class="page-title">Assessment</h1>
+</div>
+<section class="card feature-card">
+  <form method="post" class="feature-form">
+    {% csrf_token %}{{ form.revision }}
+    <fieldset>
+      <legend>{{ item.prompt }}</legend>
+      {% if form.answer.errors %}<p class="field-error" role="alert">{{ form.answer.errors|first }}</p>{% endif %}
+      {% for choice in form.answer %}<label class="answer-choice" for="{{ choice.id_for_label }}">{{ choice.tag }} <span>{{ choice.choice_label }}</span></label>{% endfor %}
+    </fieldset>
+    <p class="small muted">Choose Unsure if you can’t verify the practice. Continue saves your answer.</p>
+    <div class="feature-controls">
+      {% if previous %}<a class="btn btn-secondary" href="{% url 'posture:question' assessment.id previous.key %}">Back</a>{% endif %}
+      <a class="btn btn-secondary" href="{% url 'posture:assessment_review' assessment.id %}">Review saved answers</a>
+      <button class="btn btn-primary" type="submit">Save and continue</button>
+    </div>
+  </form>
+</section>
+{% endblock %}

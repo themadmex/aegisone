@@ -1,0 +1,6 @@
+<a href="{% url 'workspaces:overview' %}"{% if nav == "overview" %} aria-current="page"{% endif %}>Overview</a>
+<a href="{% url 'posture:assessment' %}"{% if nav == "assessment" %} aria-current="page"{% endif %}>Assessment</a>
+<a href="{% url 'posture:actions' %}"{% if nav == "actions" %} aria-current="page"{% endif %}>Actions</a>
+<a href="{% url 'posture:domains' %}"{% if nav == "domains" %} aria-current="page"{% endif %}>Domains</a>
+<a href="{% url 'posture:reports' %}"{% if nav == "reports" %} aria-current="page"{% endif %}>Reports</a>
+{% if request.membership.is_owner %}<a href="{% url 'workspaces:members' %}"{% if nav == "settings" %} aria-current="page"{% endif %}>Settings</a>{% endif %}

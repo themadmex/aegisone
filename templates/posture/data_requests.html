@@ -1,0 +1,23 @@
+{% extends "app_base.html" %}
+{% block page_title %}Data requests{% endblock %}
+{% block content %}
+<h1 class="page-title">Workspace data requests</h1>
+<section class="card feature-card">
+  <p>Ask for a workspace export or closure. Support verifies your authority and contacts the workspace owner before processing the request.</p>
+  {% for value, label in kinds %}
+    <form method="post" class="feature-form">{% csrf_token %}
+      <input type="hidden" name="kind" value="{{ value }}">
+      <label class="answer-choice"><input type="checkbox" name="confirmed" required> Confirm {{ label|lower }} request</label>
+      <div><button class="btn btn-primary" type="submit">Request {{ label|lower }}</button></div>
+    </form>
+  {% endfor %}
+</section>
+<section class="card feature-card">
+  <h2>Request history</h2>
+  <ul class="feature-list">
+    {% for item in items %}<li>{{ item.get_kind_display }} · {{ item.created_at|date:"j M Y, H:i" }} <strong>{{ item.get_status_display }}</strong>
+      {% if item.export_payload.expires_at > now and item.requested_by_id == request.user.id %}<a href="{% url 'posture:data_export' item.id %}">Download export</a>{% endif %}
+    </li>{% empty %}<li>You haven’t made any requests.</li>{% endfor %}
+  </ul>
+</section>
+{% endblock %}

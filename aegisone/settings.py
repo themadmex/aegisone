@@ -30,6 +30,9 @@ SECRET_KEY = env("DJANGO_SECRET_KEY", "dev-only-insecure-key" if DEBUG else None
 ALLOWED_HOSTS = [h.strip() for h in env("DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1").split(",") if h.strip()]
 CSRF_TRUSTED_ORIGINS = [o.strip() for o in env("DJANGO_CSRF_TRUSTED_ORIGINS", "").split(",") if o.strip()]
 APP_BASE_URL = env("APP_BASE_URL", "http://localhost:8000").rstrip("/")
+DNS_CHECKS_ENABLED = env_bool("DNS_CHECKS_ENABLED")
+DNS_PUBLIC_RESOLVER = env("DNS_PUBLIC_RESOLVER", "1.1.1.1")
+PUBLIC_LANDING_ENABLED = env_bool("PUBLIC_LANDING_ENABLED")
 
 INSTALLED_APPS = [
     "django.contrib.auth",
@@ -43,6 +46,7 @@ INSTALLED_APPS = [
     "apps.core",
     "apps.accounts",
     "apps.workspaces",
+    "apps.posture",
 ]
 
 MIDDLEWARE = [
@@ -192,7 +196,14 @@ USE_TZ = True
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
+    "filters": {"redact_account_links": {"()": "apps.core.logging.RedactAccountLinks"}},
     "formatters": {"plain": {"format": "%(asctime)s %(levelname)s %(name)s %(message)s"}},
-    "handlers": {"console": {"class": "logging.StreamHandler", "formatter": "plain"}},
+    "handlers": {"console": {
+        "class": "logging.StreamHandler", "formatter": "plain", "filters": ["redact_account_links"],
+    }},
+    "loggers": {
+        "django": {"handlers": ["console"], "level": env("LOG_LEVEL", "INFO"), "propagate": False},
+        "django.server": {"handlers": ["console"], "level": "INFO", "propagate": False},
+    },
     "root": {"handlers": ["console"], "level": env("LOG_LEVEL", "INFO")},
 }

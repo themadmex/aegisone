@@ -1,0 +1,47 @@
+{% extends "app_base.html" %}
+{% load static %}
+{% block page_title %}Assessment report{% endblock %}
+{% block content %}
+<p class="no-print"><a href="{% url 'posture:reports' %}">Back to reports</a></p>
+<h1 class="page-title">{{ snapshot.workspace }} assessment report</h1>
+<section class="card feature-card">
+  <h2>{{ snapshot.score }}% · Self-reported baseline</h2>
+  <p>Assessment submitted <time datetime="{{ snapshot.submitted_at }}">{{ snapshot.submitted_label }}</time> · Catalog v{{ snapshot.catalog_version }} · {{ snapshot.unsure_count }} unsure</p>
+  {% if report %}
+    <p>Report saved {{ report.created_at|date:"j M Y, H:i" }}</p>
+    <div class="feature-controls no-print">
+      <button class="btn btn-primary" type="button" data-print-report hidden>Print or save as PDF</button>
+      <noscript><p>Use your browser’s Print command to print or save this report.</p></noscript>
+      {% if can_revoke %}
+        <details><summary>Manage report access</summary>
+          <p>Revoking this report removes it from the workspace’s report list.</p>
+          <form method="post" action="{% url 'posture:report_revoke' report.id %}">{% csrf_token %}<button class="btn btn-secondary" type="submit">Revoke report</button></form>
+        </details>
+      {% endif %}
+    </div>
+    <script src="{% static 'js/report-print.js' %}" defer></script>
+  {% else %}
+    <form method="post" class="no-print">{% csrf_token %}{{ form.version }}<button class="btn btn-primary" type="submit">Save report</button></form>
+  {% endif %}
+</section>
+<section class="card feature-card">
+  <h2>Prioritized actions</h2>
+  <ol class="feature-list">
+    {% for item in snapshot.actions %}
+      <li><div><strong>{{ item.title }} · {{ item.priority }} · {{ item.status }}</strong><p>{{ item.reason }}</p><p>{{ item.steps }}</p><p>{{ item.confirmation }}</p></div></li>
+    {% empty %}<li>No current action suggestions.</li>{% endfor %}
+  </ol>
+</section>
+<section class="card feature-card">
+  <h2>Assessment answers</h2>
+  <ol class="feature-list">{% for item in snapshot.answers %}<li><span>{{ item.prompt }}</span><strong>{{ item.answer }}</strong></li>{% endfor %}</ol>
+</section>
+<section class="card feature-card">
+  <h2>Public DNS observations</h2>
+  <p>Observations cover the exact names and times shown. Inheritance, delivery and enforcement were outside the checks.</p>
+  {% for domain in snapshot.domain_observations %}
+  <h3>{{ domain.name }}</h3><p><time datetime="{{ domain.observed_at }}">{{ domain.observed_label }}</time></p>
+  <ul class="feature-list">{% for item in domain.observations %}<li><strong>{{ item.kind }} · {{ item.label }}</strong><span>{{ item.detail }}</span></li>{% endfor %}</ul>
+  {% empty %}<p>No recent domain observations were available when this report was prepared.</p>{% endfor %}
+</section>
+{% endblock %}

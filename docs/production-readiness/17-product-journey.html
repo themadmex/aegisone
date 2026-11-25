@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AegisOne pilot journey</title>
+<style>
+  :root { color-scheme: light; font-family: system-ui, sans-serif; color: #17253a; background: #f4f7fa; }
+  body { margin: 0; }
+  main { max-width: 52rem; margin: auto; padding: 2rem min(5vw, 3rem); }
+  h1 { font-size: clamp(1.75rem, 5vw, 2.65rem); margin-bottom: .5rem; }
+  p { line-height: 1.6; }
+  ol { counter-reset: step; list-style: none; margin: 2rem 0; padding: 0; }
+  li { position: relative; border-left: 2px solid #80afa8; padding: 0 0 1.15rem 1.25rem; }
+  details { background: #fff; border: 1px solid #bdcbd6; border-radius: .75rem; }
+  summary { min-height: 2.75rem; box-sizing: border-box; padding: .65rem 1rem; font-weight: 700; cursor: pointer; }
+  summary:focus-visible { outline: 3px solid #075e58; outline-offset: 2px; }
+  details p { margin: 0; padding: 0 1rem 1rem; }
+  details[open] p { animation: show .14s ease-out both; }
+  @keyframes show { from { opacity: .75; transform: translateY(-.18rem); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce), print { details[open] p { animation: none; } }
+  @media (forced-colors: active) { summary:focus-visible { outline-color: Highlight; } }
+</style>
+<main>
+  <h1>AegisOne pilot journey</h1>
+  <p>Start with an invitation, save a security baseline and record the actions your workspace takes. Open each step for its outcome and recovery path.</p>
+  <ol>
+    <li><details open><summary>Accept the invitation and enroll MFA</summary><p>Use the invited email, choose a password and verify the authenticator code. Store the recovery codes privately. An expired invitation needs a replacement.</p></details></li>
+    <li><details open><summary>Complete the assessment</summary><p>Choose Yes, Partly, No or Unsure for each question. Resume the draft from any signed-in device. Submit after reviewing all 20 answers.</p></details></li>
+    <li><details open><summary>Work through prioritized actions</summary><p>Read why each gap appeared, how to address it and how to verify the fix. Change the status and review its activity history.</p></details></li>
+    <li><details open><summary>Save and print a report</summary><p>Review the current evidence and save a dated private snapshot. Print a local copy. A newer assessment leaves the saved snapshot intact.</p></details></li>
+    <li><details open><summary>Verify a domain when DNS checks are enabled</summary><p>An owner attests authorization, publishes the exact TXT proof and requests verification. A verified name can be checked for SPF and DMARC. Use the detail page to see the result or try again.</p></details></li>
+    <li><details open><summary>Manage access and workspace data</summary><p>Use Profile settings for your name or password. Owners can manage workspace membership and request an export or closure. An operator verifies authority before processing.</p></details></li>
+  </ol>
+</main>
+</html>

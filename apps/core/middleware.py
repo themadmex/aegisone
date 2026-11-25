@@ -67,7 +67,10 @@ class SecurityHeadersMiddleware:
         response.setdefault("Content-Security-Policy", CONTENT_SECURITY_POLICY)
         response.setdefault("Permissions-Policy", "camera=(), microphone=(), geolocation=(), payment=()")
         is_static = request.path.startswith(settings.STATIC_URL)
-        if not is_static and (request.user.is_authenticated if hasattr(request, "user") else False):
+        account_path = request.path.startswith(("/invite/", "/recovery", "/signin"))
+        if account_path:
+            response["Referrer-Policy"] = "strict-origin"
+        if not is_static and (account_path or (hasattr(request, "user") and request.user.is_authenticated)):
             response["Cache-Control"] = "no-store"
         elif not is_static:
             response.setdefault("Cache-Control", "no-cache")

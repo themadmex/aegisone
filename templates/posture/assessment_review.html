@@ -1,0 +1,25 @@
+{% extends "app_base.html" %}
+{% block page_title %}Assessment{% endblock %}
+{% block content %}
+<h1 class="page-title">{% if assessment.submitted_at %}Submitted assessment{% else %}Review your answers{% endif %}</h1>
+<section class="card feature-card">
+  {% if assessment.submitted_at %}
+    <h2>{{ assessment.score }}% · Self-reported baseline</h2>
+    <p>Submitted {{ assessment.submitted_at|date:"j M Y, H:i" }} · Catalog v{{ assessment.template_version }} · {{ assessment.unsure_count }} unsure</p>
+    <p><a class="btn btn-primary" href="{% url 'posture:actions' %}">View your actions</a></p>
+  {% else %}
+    <p>Answer all 20 questions to submit. Your answers are saved and shown here.</p>
+    <form method="post" action="{% url 'posture:assessment_submit' assessment.id %}">
+      {% csrf_token %}{{ form.revision }}
+      <button class="btn btn-primary" type="submit"{% if not complete %} disabled{% endif %}>Submit assessment</button>
+    </form>
+  {% endif %}
+  <ol class="feature-list">
+    {% for item, answer in rows %}
+      <li><div><strong>{{ item.prompt }}</strong><p class="muted">{{ answer }}</p></div>
+        {% if not assessment.submitted_at %}<a class="btn btn-secondary" href="{% url 'posture:question' assessment.id item.key %}" aria-label="Edit question {{ forloop.counter }}">Edit</a>{% endif %}
+      </li>
+    {% endfor %}
+  </ol>
+</section>
+{% endblock %}

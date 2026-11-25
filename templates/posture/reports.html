@@ -1,0 +1,15 @@
+{% extends "app_base.html" %}
+{% block page_title %}Reports{% endblock %}
+{% block content %}
+<h1 class="page-title">Reports</h1>
+<section class="card feature-card">
+  <h2>Workspace snapshots</h2>
+  <p>Save a dated assessment and action summary. Reports are available to current workspace members.</p>
+  {% if latest %}<p><a class="btn btn-primary" href="{% url 'posture:report_preview' %}">Preview a new report</a></p>
+  {% else %}<p>Submit an assessment to create your first report.</p>{% endif %}
+  <ul class="feature-list">
+    {% for report in items %}<li><a href="{% url 'posture:report' report.id %}">Report saved {{ report.created_at|date:"j M Y, H:i" }}</a><span>{{ report.snapshot.score }}% baseline</span></li>
+    {% empty %}<li>There are no saved reports.</li>{% endfor %}
+  </ul>
+</section>
+{% endblock %}

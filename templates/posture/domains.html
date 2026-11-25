@@ -1,0 +1,25 @@
+{% extends "app_base.html" %}
+{% block page_title %}Domains{% endblock %}
+{% block content %}
+<h1 class="page-title">Domains</h1>
+<section class="card feature-card">
+  <p>Review SPF and DMARC TXT records for the exact names you administer.</p>
+  {% if not enabled %}<p>New DNS checks are disabled in this environment. Previously recorded observations remain available.</p>{% endif %}
+  {% if enabled and request.membership.is_owner %}
+    <h2>Add an authorized domain</h2>
+    <form method="post" class="feature-form">{% csrf_token %}
+      {% include "partials/field.html" with field=form.name %}
+      {% for field in form %}{% if field.name != "name" %}
+        <label class="answer-choice">{{ field }} {{ field.label }}</label>
+        {% if field.errors %}<p class="field-error" role="alert">{{ field.errors|first }}</p>{% endif %}
+      {% endif %}{% endfor %}
+      <div><button class="btn btn-primary" type="submit">Add domain</button></div>
+    </form>
+  {% endif %}
+  <ul class="feature-list">
+    {% for domain, verified in items %}<li><a href="{% url 'posture:domain_detail' domain.id %}">{{ domain.name }}</a>
+      <span>{% if domain.revoked_at %}Revoked{% elif verified %}Verified{% else %}Verification required{% endif %}</span></li>
+    {% empty %}<li>No domains have been added.</li>{% endfor %}
+  </ul>
+</section>
+{% endblock %}

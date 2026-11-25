@@ -1,21 +1,21 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}{% block page_title %}{% endblock %} · {{ request.workspace.name }} · AegisOne Open{% endblock %}
 {% block body %}
 <header class="app-header">
   <a class="brand" href="{% url 'workspaces:overview' %}" aria-label="AegisOne Open home">{% include "partials/logo.html" %}<span class="brand-name">AegisOne</span></a>
   <nav class="nav-wrap" aria-label="Workspace">
     <div class="nav-dock">
-      <a href="{% url 'workspaces:overview' %}"{% if nav == "overview" %} aria-current="page"{% endif %}>Overview</a>
-      <span aria-disabled="true" title="Arrives in the next build slice">Assessment</span>
-      <span aria-disabled="true" title="Arrives in the next build slice">Actions</span>
-      <span aria-disabled="true" title="Arrives in a later build slice">Domains</span>
-      <span aria-disabled="true" title="Arrives in a later build slice">Reports</span>
-      {% if request.membership.is_owner %}<a href="{% url 'workspaces:members' %}"{% if nav == "settings" %} aria-current="page"{% endif %}>Settings</a>{% endif %}
+      {% include "partials/workspace_nav.html" %}
     </div>
   </nav>
+  <details class="mobile-nav">
+    <summary class="pill-control">Menu</summary>
+    <nav class="menu-panel" aria-label="Workspace">{% include "partials/workspace_nav.html" %}</nav>
+  </details>
   <div class="header-tools">
     <details class="menu">
-      <summary class="pill-control" aria-label="Switch workspace, current: {{ request.workspace.name }}"><span class="dot"></span>{{ request.workspace.name }}</summary>
+      <summary class="pill-control" aria-label="Switch workspace, current: {{ request.workspace.name }}"><span class="dot"></span><span class="workspace-name">{{ request.workspace.name }}</span></summary>
       <div class="menu-panel">
         {% for m in request.memberships %}
         <form method="post" action="{% url 'workspaces:switch' %}">{% csrf_token %}
@@ -30,6 +30,7 @@
       <div class="menu-panel">
         <div class="who"><strong>{{ request.user.display_name }}</strong><span class="small muted">{{ request.user.email }}</span></div>
         <a href="{% url 'accounts:profile' %}"{% if request.resolver_match.url_name == 'profile' or request.resolver_match.url_name == 'change_password' %} aria-current="page"{% endif %}>Profile settings</a>
+        <a href="{% url 'help' %}">Help</a>
         <form method="post" action="{% url 'accounts:sign_out' %}">{% csrf_token %}<button type="submit" class="danger">Sign out</button></form>
       </div>
     </details>
@@ -43,4 +44,5 @@
   {% endif %}
   {% block content %}{% endblock %}
 </main>
+<script src="{% static 'js/workspace-menu.js' %}" defer></script>
 {% endblock %}

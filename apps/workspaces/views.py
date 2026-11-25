@@ -5,6 +5,10 @@ from django.utils import timezone
 from django.views.decorators.http import require_GET, require_POST
 from django_ratelimit.decorators import ratelimit
 
+from apps.posture.models import Action
+from apps.posture.reports import domain_observations
+from apps.posture.services import draft_for, latest_assessment
+
 from . import services
 from .access import SESSION_WORKSPACE, workspace_view
 from .forms import InviteForm
@@ -14,7 +18,13 @@ from .models import Invitation, Membership
 @require_GET
 @workspace_view()
 def overview(request):
-    return render(request, "workspaces/overview.html", {"nav": "overview"})
+    return render(request, "workspaces/overview.html", {
+        "nav": "overview",
+        "draft": draft_for(request.workspace),
+        "latest": latest_assessment(request.workspace),
+        "top_actions": Action.objects.filter(workspace=request.workspace, current_gap=True).exclude(status=Action.Status.DONE)[:3],
+        "recent_domains": domain_observations(request.workspace)[:3],
+    })
 
 
 def _members_context(request, form=None):

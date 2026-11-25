@@ -5,7 +5,7 @@ from . import views
 app_name = "workspaces"
 
 urlpatterns = [
-    path("", views.overview, name="overview"),
+    path("overview", views.overview, name="overview"),
     path("workspaces/switch", views.switch, name="switch"),
     path("settings/members", views.members, name="members"),
     path("settings/members/invite", views.invite, name="invite"),

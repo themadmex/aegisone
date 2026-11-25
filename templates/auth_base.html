@@ -16,7 +16,7 @@
   <main class="auth-main" id="main">
     <div class="auth-panel">
       {% block panel %}{% endblock %}
-      <p class="auth-footer">Privacy · Terms · Report a vulnerability</p>
+      <p class="auth-footer"><a href="{% url 'privacy' %}">Privacy</a> · <a href="{% url 'pilot' %}">Pilot use</a> · <a href="{% url 'help' %}">Help and security reporting</a></p>
     </div>
   </main>
 </div>

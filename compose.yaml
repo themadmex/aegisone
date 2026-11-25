@@ -26,12 +26,12 @@ services:
       DB_HOST: db
       DB_PORT: "5432"
       DB_APP_ROLE: aegis_app
+      DB_USER: aegis_app
+      DB_PASSWORD: aegis_app_dev
+      APP_BASE_URL: http://localhost:${AEGIS_WEB_HOST_PORT:-8000}
       DJANGO_DB_ROLE: owner
       DB_OWNER_USER: aegis_owner
       DB_OWNER_PASSWORD: aegis_owner_dev
-      DB_USER: aegis_app
-      DB_PASSWORD: aegis_app_dev
-      APP_BASE_URL: http://localhost:8000
     depends_on:
       db:
         condition: service_healthy
@@ -41,8 +41,11 @@ services:
     environment:
       <<: *app-env
       DJANGO_DB_ROLE: app
+      PUBLIC_LANDING_ENABLED: ${AEGIS_PUBLIC_LANDING_ENABLED:-0}
+      DB_OWNER_USER: ""
+      DB_OWNER_PASSWORD: ""
     ports:
-      - "127.0.0.1:8000:8000"
+      - "127.0.0.1:${AEGIS_WEB_HOST_PORT:-8000}:8000"
     depends_on:
       migrate:
         condition: service_completed_successfully
