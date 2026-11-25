@@ -107,8 +107,8 @@ async function verify(device, channel, viewport, mobile) {
         await page.getByRole("button", { name: "Start assessment" }).click();
         await checkAccessibility(page, "assessment question", device);
         await page.screenshot({ path: join(evidence, device + "-assessment.png") });
-        for (let index = 1; index <= 20; index++) {
-            await page.getByText(new RegExp("Question " + index + " of 20")).waitFor();
+        for (let index = 1; index <= 21; index++) {
+            await page.getByText(new RegExp("Question " + index + " of 21")).waitFor();
             const answer = index === 1 ? "No" : index === 2 ? "Unsure" : "Yes";
             const choice = page.getByRole("radio", { name: answer, exact: true });
             if (mobile && index === 1) {
@@ -120,7 +120,7 @@ async function verify(device, channel, viewport, mobile) {
             await page.getByRole("button", { name: "Save and continue" }).click();
             if (index === 3) {
                 await page.goto(root + "/assessment");
-                await page.getByText(/Question 4 of 20/).waitFor();
+                await page.getByText(/Question 4 of 21/).waitFor();
             }
         }
         await page.getByRole("button", { name: "Submit assessment" }).click();

@@ -8,7 +8,7 @@
     <p>Submitted {{ assessment.submitted_at|date:"j M Y, H:i" }} · Catalog v{{ assessment.template_version }} · {{ assessment.unsure_count }} unsure</p>
     <p><a class="btn btn-primary" href="{% url 'posture:actions' %}">View your actions</a></p>
   {% else %}
-    <p>Answer all 20 questions to submit. Your answers are saved and shown here.</p>
+    <p>Answer all {{ rows|length }} questions to submit. Your answers are saved and shown here.</p>
     <form method="post" action="{% url 'posture:assessment_submit' assessment.id %}">
       {% csrf_token %}{{ form.revision }}
       <button class="btn btn-primary" type="submit"{% if not complete %} disabled{% endif %}>Submit assessment</button>

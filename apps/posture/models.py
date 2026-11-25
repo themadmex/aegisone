@@ -4,7 +4,7 @@ from django.conf import settings
 from django.db import models
 from django.db.models import Q
 
-from .catalog import CURRENT_VERSION, PRIORITIES
+from .catalog import PRIORITIES
 
 
 class TenantRecord(models.Model):
@@ -16,7 +16,7 @@ class TenantRecord(models.Model):
 
 
 class Assessment(TenantRecord):
-    template_version = models.PositiveSmallIntegerField(default=CURRENT_VERSION)
+    template_version = models.PositiveSmallIntegerField(default=1)
     answers = models.JSONField(default=dict)
     revision = models.PositiveIntegerField(default=0)
     score = models.PositiveSmallIntegerField(null=True)
@@ -51,7 +51,7 @@ class Action(TenantRecord):
     reason = models.CharField(max_length=255)
     steps = models.TextField()
     confirmation = models.TextField()
-    guidance_version = models.PositiveSmallIntegerField(default=CURRENT_VERSION)
+    guidance_version = models.PositiveSmallIntegerField(default=1)
     source_kind = models.CharField(max_length=24, default="assessment")
     source_id = models.UUIDField()
     observed_at = models.DateTimeField()

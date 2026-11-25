@@ -1,8 +1,8 @@
 # AegisOne Open
 
-A plain-English security self-assessment for small businesses that turns answers into a ranked action plan and a dated report. Open source (Apache-2.0, pending founder confirmation) and self-hostable.
+Plain-English security self-assessment and shared audit infrastructure for small businesses, NGOs, and community organizations—turning everyday security checks into a ranked action plan and a dated, verifiable report. Open source under [Apache-2.0](LICENSE) and self-hostable.
 
-**Status:** invite-only pilot development. The local build supports assessments, actions, reports, approved workspace exports and closure, and optional DNS observations. General release remains **NO-GO**. See the [slice audit and verification record](docs/production-readiness/16-slice-audit-and-verification.md).
+**Status:** invite-only pilot development. The local build supports assessments, actions, reports, approved workspace exports and closure, and optional DNS observations. General release remains **NO-GO**. See the [slice audit and verification record](docs/production-readiness/16-slice-audit-and-verification.md), [security policy](SECURITY.md), and [contributing guide](CONTRIBUTING.md).
 
 ## What's here
 
@@ -48,7 +48,7 @@ Use a disposable local database and application. The browser test creates synthe
 ## Pilot user guide
 
 1. Open your invitation, create your account, enroll an authenticator and store your recovery codes privately.
-2. Open **Assessment** and save each answer as you continue. Return to Assessment to resume. Review all 20 answers, then submit the dated self-reported baseline.
+2. Open **Assessment** and save each answer as you continue. Return to Assessment to resume. Review all 21 answers, then submit the dated self-reported baseline.
 3. Open **Actions** to see the highest-priority gaps, how to address each one and how to confirm the fix. Select a status as you work. A new assessment can reopen a completed item if the gap is reported again.
 4. Open **Reports**, preview the current evidence, then save a private snapshot. Use **Print or save as PDF** for a local copy. The creator or an owner can revoke access to a saved report.
 5. Open the avatar menu for **Profile settings**. Owners can manage members and open **Data and privacy** to request an export or closure. An operator verifies the request before processing it. A completed export is available to the requesting owner for seven days.

@@ -1,6 +1,7 @@
 __pycache__/
 *.py[cod]
 .venv/
+.ruff_cache/
 .env
 .env.*
 !.env.example
@@ -10,3 +11,6 @@ staticfiles/
 htmlcov/
 *.sqlite3
 graphify-out/
+.claude/
+.vercel/
+SHARED_CHAT_CONTEXT.md

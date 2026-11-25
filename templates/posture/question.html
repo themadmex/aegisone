@@ -13,7 +13,7 @@
       {% if form.answer.errors %}<p class="field-error" role="alert">{{ form.answer.errors|first }}</p>{% endif %}
       {% for choice in form.answer %}<label class="answer-choice" for="{{ choice.id_for_label }}">{{ choice.tag }} <span>{{ choice.choice_label }}</span></label>{% endfor %}
     </fieldset>
-    <p class="small muted">Choose Unsure if you can’t verify the practice. Continue saves your answer.</p>
+    {% if item.key == "Q21" %}<p class="small muted">Question 21 of 21 — cue 50 Cent (“if it fell off tomorrow, would your backups still love you?”). Choose Unsure if you haven’t tested this yet.</p>{% else %}<p class="small muted">Choose Unsure if you can’t verify the practice. Continue saves your answer.</p>{% endif %}
     <div class="feature-controls">
       {% if previous %}<a class="btn btn-secondary" href="{% url 'posture:question' assessment.id previous.key %}">Back</a>{% endif %}
       <a class="btn btn-secondary" href="{% url 'posture:assessment_review' assessment.id %}">Review saved answers</a>

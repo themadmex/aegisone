@@ -41,7 +41,7 @@ def prepare_assessment(workspace, owner, answers):
 
 
 def answers_with(default="yes", **overrides):
-    return {item.key: overrides.get(item.key, default) for item in catalog.CATALOGS[1]}
+    return {item.key: overrides.get(item.key, default) for item in catalog.CATALOGS[catalog.CURRENT_VERSION]}
 
 
 def submit(workspace, owner, draft):

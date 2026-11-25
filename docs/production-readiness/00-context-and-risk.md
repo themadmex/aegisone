@@ -1,12 +1,12 @@
 # Context and risk
 
-A small business owner needs to decide what to fix this week, an IT generalist or retained provider needs work they can act on, and management needs a dated progress record. Test the alternative workflows in discovery, including use of spreadsheets, informal IT advice, and one-off consulting. Inputs are the founder's greenfield brief and the [local shared-chat notes](../../SHARED_CHAT_CONTEXT.md). Fellowship funding and eligibility carry no delivery dependency.
+A small organization leader needs to decide what to fix this week, an IT generalist, volunteer, or retained provider needs work they can act on, and management or governance boards need a dated progress record. Test the alternative workflows in discovery, including use of spreadsheets, informal IT advice, and one-off consulting. Fellowship funding and eligibility carry no delivery dependency.
 
 | Decision | Proposed baseline | Validation owner |
 |---|---|---|
-| Audience | 5–10 Nigerian pilot SMEs with 5–100 employees, across at least two sectors, each with a decision maker and an IT contact | Founder recruits and interviews pilot participants |
+| Audience | 5–10 Nigerian pilot small organizations (SMEs, NGOs, and community organizations) with 5–100 staff, across at least two sectors, each with a decision maker and an IT contact | Founder recruits and interviews pilot participants |
 | Delivery | English responsive web app. Invite-only hosted pilot and self-hostable distribution with the same core features | Product checks mobile use and an independent self-host install |
-| Business model | Free open-source core, no pilot billing. Apache-2.0 proposed for code, subject to founder confirmation. Future hosting and services are separate decisions | Founder confirms license and operating model |
+| Business model | Free open-source core under [Apache-2.0](../../LICENSE), no pilot billing. Future managed hosting and support services remain separate from the open distribution | Founder confirms operating model |
 | Resources | One engineering lead, part-time product/content and platform coverage, and an independent security reviewer. Provisional USD 150/month hosted ceiling | Founder confirms staffing, costs, region and support coverage before a date |
 | Brand | Confirm trademark, domain and company-name clearance for AegisOne before publication | Founder |
 | Data | Business email, membership and security posture are restricted. Adult business users and structured answers | Privacy lead reviews purposes, recipients and pilot geography |

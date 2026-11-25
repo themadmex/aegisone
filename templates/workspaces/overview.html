@@ -11,10 +11,10 @@
     <div class="hero-layout">
       <div>
         <span class="tag">Step 1 · about 15 minutes</span>
-        <h2 id="start-h">Answer 20 plain-English questions about how you work today.</h2>
-        <p class="muted">Accounts, devices, backups, email and incident readiness. You can stop and resume on any device, and Unsure is always an option.</p>
+        <h2 id="start-h">Answer 21 plain-English questions about how you work today.</h2>
+        <p class="muted">Accounts, devices, backups, email and incident readiness — yes, 21 Questions, though we only care whether your backups still love you if a laptop falls off tomorrow. Stop and resume anytime.</p>
         <p><a class="btn btn-accent lg" href="{% url 'posture:assessment' %}">{% if draft %}Continue assessment{% elif latest %}Open assessment{% else %}Start assessment{% endif %}</a></p>
-        {% if draft %}<p>{{ draft.answers|length }} of 20 draft answers saved</p>{% endif %}
+        {% if draft %}<p>{{ draft.answers|length }} of 21 draft answers saved</p>{% endif %}
       </div>
       <div>
         {% if latest %}

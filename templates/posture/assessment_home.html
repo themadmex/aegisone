@@ -4,7 +4,7 @@
 <h1 class="page-title">Assessment</h1>
 <section class="card feature-card">
   <h2>{% if latest %}Start a fresh assessment{% else %}Find your first fixes{% endif %}</h2>
-  <p>Answer 20 questions about your current practices. Allow about 15 minutes. Each answer is saved when you continue.</p>
+  <p>Answer 21 questions about your current practices (apologies to 50 Cent — no R&amp;B interrogation, just everyday security). Allow about 15 minutes; each answer is saved when you continue.</p>
   {% if latest %}<p><a href="{% url 'posture:assessment_review' latest.id %}">View your last submission</a></p>{% endif %}
   <form action="{% url 'posture:assessment_start' %}" method="post">{% csrf_token %}<button class="btn btn-primary" type="submit">Start assessment</button></form>
 </section>

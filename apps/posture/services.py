@@ -35,7 +35,9 @@ def draft_for(workspace):
 def start_assessment(workspace, actor):
     lock_workspace(workspace)
     draft = draft_for(workspace)
-    return draft or Assessment.objects.create(workspace=workspace, created_by=actor)
+    return draft or Assessment.objects.create(
+        workspace=workspace, created_by=actor, template_version=catalog.CURRENT_VERSION
+    )
 
 
 @transaction.atomic
