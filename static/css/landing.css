@@ -965,41 +965,6 @@ summary:focus-visible {
   }
 }
 
-.n3-hint {
-  pointer-events: none;
-  position: absolute;
-  top: 83%;
-  left: 50%;
-  margin: 0;
-  transform: translateX(-50%);
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 12.5px;
-  color: var(--color-n3-grey);
-  white-space: nowrap;
-}
-
-.n3-hint-icon {
-  width: 15px;
-  height: 15px;
-  flex-shrink: 0;
-}
-
-.n3-hint-tap {
-  display: none;
-}
-
-@media (hover: none), (max-width: 767px) {
-  .n3-hint-hover {
-    display: none;
-  }
-
-  .n3-hint-tap {
-    display: inline;
-  }
-}
-
 .n3-core-btn {
   position: absolute;
   top: 30%;

@@ -232,7 +232,7 @@
           chipClass: 'lp-chip lp-chip-pop',
           badge: 'High priority · +0 baseline pts',
           rule: 'Rule Q02 → Action',
-          title: 'Turn on MFA across company email, starting with admins & finance',
+          title: 'Roll out MFA enterprise-wide, starting with crown jewel email accounts',
           desc: 'Ranks near the top of your plan with step-by-step setup notes and a simple check to confirm every active mailbox is enrolled.',
         },
         unsure: {
@@ -246,8 +246,8 @@
       },
     },
     q21: {
-      prompt: 'Question 21: If your main work laptop fell off tomorrow, would your backups still love you?',
-      help: 'Apologies to 50 Cent — in plain English, if a laptop vanished in a taxi tonight, could you lock it remotely and carry on without panic?',
+      prompt: 'Q21: If your work laptop went missing, would your backups still love you?',
+      help: 'If a work laptop vanished in a taxi right now, could you remotely wipe it and carry on without panic?',
       subs: { yes: 'Still loyal', partly: 'Files, maybe', no: 'Heartbreak', unsure: 'Let’s find out' },
       defaultChoice: 'unsure',
       outcomes: {
@@ -264,8 +264,8 @@
           chipClass: 'lp-chip lp-chip-pop',
           badge: 'Worth testing · +1 baseline pt',
           rule: 'Rule Q21 → Action',
-          title: 'Run a 10-minute lost-laptop & restore dry run',
-          desc: 'Cloud sync helps, but verify you can remotely revoke active sessions and restore key business files onto a spare machine.',
+          title: 'Run a 10-minute lost-laptop dry run',
+          desc: 'Cloud sync helps, but verify you can remotely revoke active sessions and restore key business files to another endpoint.',
         },
         no: {
           tone: 'priority',
@@ -454,7 +454,6 @@
   const restCore = document.getElementById('n3-rest-core');
   const explodedCore = document.getElementById('n3-exploded-core');
   const shadowLayer = document.getElementById('n3-shadow-layer');
-  const hint = document.getElementById('n3-hint');
   const connectorsWrap = visual.querySelector('[data-connectors]');
   const stageCardsList = visual.querySelector('[data-stage-cards]');
 
@@ -582,7 +581,7 @@
   reducedQuery.addEventListener('change', (e) => {
     reduceMotion = e.matches;
     syncReducedMotionBeads();
-    applyHeroScrollParallax();
+    tickHeroParallax();
     scheduleTick();
   });
 
@@ -647,7 +646,6 @@
     const expOp = mapRange(p, 0, 0.03, 0, 1);
     if (restCore) restCore.style.opacity = restOp.toFixed(3);
     if (explodedCore) explodedCore.style.opacity = expOp.toFixed(3);
-    if (hint) hint.style.opacity = mapRange(p, 0, 0.25, 1, 0).toFixed(3);
 
     for (let i = 0; i < 5; i += 1) {
       const delay = Math.abs(i - AI_PLATE) * STAGGER;
